@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9388a1c3e03364f0ebac13bc7cb7ca16, type: 3}
-  m_Name: WizardTower
+  m_Script: {fileID: 11500000, guid: 57bbf7f273981467182141a2c4145888, type: 3}
+  m_Name: Lightning
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  img: {fileID: 0}
-  range: 0
-  atkSpeed: 0
-  projectile: {fileID: 0}
+  name: fire
+  description: balls
+  speed: 5
+  duration: 2
+  damage: 100
