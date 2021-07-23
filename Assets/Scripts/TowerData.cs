@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+[CreateAssetMenu(fileName = "New Tower", menuName = "Tower")]
+public class TowerData : ScriptableObject
+{
+    public new string name;
+    public string description;
+    public Sprite img;
+    public int range;
+    public int atkSpeed;
+    public GameObject projectile;
+    
+    
+}
