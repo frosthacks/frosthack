@@ -17,6 +17,9 @@ public class PathVisualizer
 
         Gizmos.DrawSphere(pathNode.transform.position, 0.1f);
 
+        Gizmos.color = Color.green * 0.5f;
+        Gizmos.DrawSphere(pathNode.transform.position, PathNode.stoppingRange);
+
         // draw line connecting current node to next node
         if (pathNode.nextNode != null) {
 

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PathTraveller : MonoBehaviour
 {
-    public float moveSpeed;
+    public float moveSpeed = 1.0f;
 
-    [SerializeField] private PathNode destinationNode;
+    public PathNode destinationNode;
 
     void Start() {
         
@@ -14,9 +14,14 @@ public class PathTraveller : MonoBehaviour
 
     void Update() {
 
+        if (destinationNode == null) return;
+
         Vector3 destVec = destinationNode.transform.position - transform.position;
-        if (destVec.magnitude >= PathNode.stoppingRange) {
+
+        if (destVec.magnitude >= PathNode.stoppingRange+Random.Range(-0.1f, 0.1f)) {
             transform.Translate(destVec.normalized * moveSpeed * Time.deltaTime);
+        } else {
+            destinationNode = destinationNode.nextNode;
         }
 
     }
