@@ -16,7 +16,7 @@ public class WaveManager : MonoBehaviour
 
     public Queue<WaveGroup> waveQueue = new Queue<WaveGroup>();
     public bool isWaveOngoing = false;
-    public Transform tempSpawnPoint;
+    public PathNode[] spawnPointList;
 
     void Start() {
         WaveManager.Global = this;
@@ -56,9 +56,11 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < waveInfo.count; i++) {
 
             // create enemy gameobjects and set them up
-            GameObject newEnemy = (GameObject)Instantiate(Resources.Load(waveInfo.prefabName));
-            newEnemy.transform.position = WaveManager.Global.tempSpawnPoint.transform.position;
-            newEnemy.GetComponent<PathTraveller>().destinationNode = WaveManager.Global.tempSpawnPoint.GetComponent<PathNode>();
+            foreach (PathNode p in WaveManager.Global.spawnPointList) {
+                GameObject newEnemy = (GameObject)Instantiate(Resources.Load(waveInfo.prefabName));
+                newEnemy.transform.position = p.transform.position;
+                newEnemy.GetComponent<PathTraveller>().destinationNode = p;
+            }
 
             yield return new WaitForSeconds(waveInfo.stagger);
         }
