@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum Priority
+public enum ComparatorPriority
 {
     Close, Far, Strong, Weak
 
@@ -15,5 +15,5 @@ abstract public class Comparator
         this.transform = transform;
 
     }
-    public abstract int SortBy(Enemy enemy1, Enemy enemy2);
+    public abstract int SortBy(GameObject enemy1, GameObject enemy2);
 }

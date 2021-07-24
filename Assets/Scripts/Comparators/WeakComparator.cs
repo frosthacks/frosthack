@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeakComparator : MonoBehaviour
+public class WeakComparator : Comparator
 {
-    // Start is called before the first frame update
-    void Start()
+    public WeakComparator(Transform transform) : base(transform)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override int SortBy(GameObject enemy1, GameObject enemy2)
     {
-        
+        return enemy1.GetComponent<Enemy>().data.health.CompareTo(enemy2.GetComponent<Enemy>().data.health);
     }
 }

@@ -8,8 +8,8 @@ public class StrongComparator : Comparator
     {
     }
 
-    public override int SortBy(Enemy enemy1, Enemy enemy2)
+    public override int SortBy(GameObject enemy1, GameObject enemy2)
     {
-        throw new System.NotImplementedException();
+        return enemy1.GetComponent<Enemy>().data.health.CompareTo(enemy2.GetComponent<Enemy>().data.health);
     }
 }

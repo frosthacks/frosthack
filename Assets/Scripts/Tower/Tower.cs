@@ -9,6 +9,19 @@ public class Tower : MonoBehaviour
     public float delta = 0;
     public Vector2 enemyPosition;
     public GameObject enemies;
+
+
+
+
+    public ComparatorPriority priority = ComparatorPriority.Close;
+    public CloseComparator closeComparator;
+    public FarComparator farComparator;
+    public StrongComparator strongComparator;
+    public WeakComparator weakComparator;
+
+    public Vector3 target;
+    public bool targetExists;
+
     
 
     
@@ -22,6 +35,10 @@ public class Tower : MonoBehaviour
     void Start()
     {
         enemies = GameObject.Find("/Enemies");
+        closeComparator = new CloseComparator(transform);
+        farComparator = new FarComparator(transform);
+        strongComparator = new StrongComparator(transform);
+        weakComparator = new WeakComparator(transform);
         
 
         
@@ -32,15 +49,56 @@ public class Tower : MonoBehaviour
     }
     void FindTarget()
     {
-        List<Transform> inRadius = new List<Transform>() ;
-        foreach(Transform enemy in enemies.transform)
+        targetExists = true;
+        List<GameObject> inRadius = new List<GameObject>();
+        foreach (Transform enemy in enemies.transform)
         {
-            if (Vector2.Distance(transform.position, enemy.position)<data.range)
+            if (Vector2.Distance(transform.position, enemy.position) < data.range)
             {
-                inRadius.Add(enemy);
+                inRadius.Add(enemy.gameObject);
 
             }
         }
+        if (inRadius.Count == 0)
+        {
+            targetExists = false;
+  
+
+            return;
+        }
+
+        Comparator comparator = closeComparator;
+        switch (priority)
+        {
+            case ComparatorPriority.Close:
+                {
+                    
+                    comparator = closeComparator;
+                    break;
+                }
+            case ComparatorPriority.Far:
+                {
+                    comparator = closeComparator;
+                    break;
+                }
+            case ComparatorPriority.Strong:
+                {
+                    comparator = closeComparator;
+                    break;
+                }
+            case ComparatorPriority.Weak:
+                {
+                    comparator = closeComparator;
+                    break;
+                }
+        }
+        
+
+        
+        inRadius.Sort((p1, p2) => comparator.SortBy(p1, p2));
+        target = inRadius[0].transform.position;
+        
+
 
 
 
@@ -50,17 +108,24 @@ public class Tower : MonoBehaviour
     
     void FixedUpdate()
     {
+        
         if (!placed)
         {
             return;
         }
+        
         delta += Time.deltaTime;
         if (delta > data.atkSpeed)
         {
+            FindTarget();
+            if (!targetExists)
+            {
+                return;
+            }
             delta = 0;
             GameObject projectile = Instantiate(data.projectile,transform.position,Quaternion.identity);
             projectile.transform.SetParent(GameObject.Find("/Projectiles").transform);
-            projectile.GetComponent<Projectile>().Shoot(Vector3.zero);
+            projectile.GetComponent<Projectile>().Shoot(target);
             //projectile.transform.LookAt(Vector3.zero);
         }
 
