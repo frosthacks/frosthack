@@ -6,16 +6,14 @@ public class Enemy : MonoBehaviour
 {
     public EnemyData data;
     SpriteRenderer spriteRenderer;
-    // Start is called before the first frame update
-    void Start()
-    {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = data.img;
 
+    void Start() {
+   
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         

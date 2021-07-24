@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class PathTraveller : MonoBehaviour
 {
-    public float moveSpeed = 1.0f;
-
     public PathNode destinationNode;
 
     void Start() {
@@ -14,16 +13,26 @@ public class PathTraveller : MonoBehaviour
 
     void Update() {
 
-        if (destinationNode == null) return;
+        if (destinationNode == null) {
+            handleEndOfPath();
+            return;
+        }
 
         Vector3 destVec = destinationNode.transform.position - transform.position;
 
         if (destVec.magnitude >= PathNode.stoppingRange+Random.Range(-0.1f, 0.1f)) {
+            float moveSpeed = GetComponent<Enemy>().data.speed;
             transform.Translate(destVec.normalized * moveSpeed * Time.deltaTime);
         } else {
             destinationNode = destinationNode.nextNode;
         }
 
+    }
+
+    void handleEndOfPath() {
+        Destroy(gameObject); 
+
+        UserManager.Global.takeDamage(GetComponent<Enemy>().data.damage);
     }
 
 }

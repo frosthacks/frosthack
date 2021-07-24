@@ -7,6 +7,7 @@ public class TowerData : ScriptableObject
 {
     public new string name;
     public string description;
+    public int cost;
     public float range;
     public float placeRadius;
     public int atkSpeed;
