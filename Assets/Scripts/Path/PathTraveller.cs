@@ -4,7 +4,7 @@ using UnityEngine;
 using Mirror;
 
 [RequireComponent(typeof(Enemy))]
-public class PathTraveller : MonoBehaviour
+public class PathTraveller : NetworkBehaviour
 {
     public PathNode destinationNode;
 
@@ -12,6 +12,7 @@ public class PathTraveller : MonoBehaviour
         
     }
 
+    [Server]
     void Update() {
 
         if (destinationNode == null) {
@@ -30,6 +31,7 @@ public class PathTraveller : MonoBehaviour
 
     }
 
+    [Server]
     void handleEndOfPath() {
         NetworkServer.Destroy(gameObject); 
 
