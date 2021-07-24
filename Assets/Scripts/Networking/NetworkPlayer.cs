@@ -9,11 +9,41 @@ public class NetworkPlayer : NetworkBehaviour
     public PlayerUIInfo uiAdjust;
 
     // initialize these variables and they replicate
-    [SyncVar]
-    public string username;
+    [SyncVar(hook = nameof(nameChanged))]
+    public string username = "";
 
-    [SyncVar]
+    public void nameChanged(string oldValue, string newValue)
+    {
+        if (uiAdjust != null)
+        {
+            uiAdjust.username.text = newValue;
+            Debug.Log("Username was set after init");
+        }
+        else
+        {
+            Debug.Log("Username should be set safely now");
+        }
+    }
+
+    [SyncVar(hook = nameof(locationChanged))]
     public Vector3 location;
+
+    public void locationChanged(Vector3 oldValue, Vector3 newValue)
+    {
+        if (isLocalPlayer)
+        {
+            if (uiAdjust != null)
+            {
+                GameObject.Find("Main Camera").transform.position = newValue + new Vector3(0, 0, -10);
+                Debug.Log("Location was set after init");
+            }
+            else
+            {
+                Debug.Log("Location should be set safely now");
+            }
+        }
+    }
+
 
     // Hp synchronization calls a client hook to handle UI
     [SyncVar(hook = nameof(healthChanged))]
