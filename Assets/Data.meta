@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 476f0e9f18e3d4662867ae22b550ad34
+<<<<<<< HEAD:Assets/Data.meta
+guid: eb709ed1fe771a14ea0cb6ce6881761d
+=======
+guid: 96d74662fc16ad14ba2c63e9399c4978
+>>>>>>> 1eaa406 (Added networked lobby):Assets/Scripts/Networking.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

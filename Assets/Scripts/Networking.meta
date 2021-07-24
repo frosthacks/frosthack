@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Data.meta
+guid: ead02b46d2a31e8448d5ebee6c34c622
+=======
+guid: 96d74662fc16ad14ba2c63e9399c4978
+>>>>>>> 1eaa406 (Added networked lobby):Assets/Scripts/Networking.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
