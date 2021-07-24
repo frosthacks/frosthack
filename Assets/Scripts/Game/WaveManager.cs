@@ -60,6 +60,7 @@ public class WaveManager : MonoBehaviour
             // create enemy gameobjects and set them up
             foreach (PathNode p in WaveManager.Global.spawnPointList) {
                 GameObject newEnemy = (GameObject)Instantiate(Resources.Load(waveInfo.prefabName));
+                newEnemy.transform.SetParent(GameObject.Find("Enemies").transform);
                 newEnemy.transform.position = p.transform.position+new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
                 newEnemy.GetComponent<PathTraveller>().destinationNode = p;
             }
