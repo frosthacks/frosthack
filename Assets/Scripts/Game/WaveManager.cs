@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +16,9 @@ public class WaveManager : MonoBehaviour
     public Queue<WaveGroup> waveQueue = new Queue<WaveGroup>();
     public bool isWaveOngoing = false;
     public PathNode[] spawnPointList;
+
+    // config
+    public float spawnRadius = 0.25f;
 
     void Start() {
         WaveManager.Global = this;
@@ -58,7 +60,7 @@ public class WaveManager : MonoBehaviour
             // create enemy gameobjects and set them up
             foreach (PathNode p in WaveManager.Global.spawnPointList) {
                 GameObject newEnemy = (GameObject)Instantiate(Resources.Load(waveInfo.prefabName));
-                newEnemy.transform.position = p.transform.position;
+                newEnemy.transform.position = p.transform.position+new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
                 newEnemy.GetComponent<PathTraveller>().destinationNode = p;
             }
 
