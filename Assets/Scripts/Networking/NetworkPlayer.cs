@@ -68,8 +68,7 @@ public class NetworkPlayer : NetworkBehaviour
         RpcMoney(money);
     }
 
-    [TargetRpc]
-    public void RpcMoney(int newAmount)
+    public void setClientMoney(int newAmount)
     {
         money = newAmount;
         if (dataSingleton != null)
@@ -81,5 +80,11 @@ public class NetworkPlayer : NetworkBehaviour
         {
             uiAdjust.cashText.text = "$" + newAmount.ToString();
         }
+    }
+
+    [TargetRpc]
+    public void RpcMoney(int newAmount)
+    {
+        setClientMoney(newAmount);    
     }
 }

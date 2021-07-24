@@ -20,7 +20,11 @@ public class GameHandler : StateManager
 
     [SyncVar(hook = nameof(roundChanged))]
     public float round = 0.0f;
-    float roundStart = -1;
+
+    [SyncVar(hook = nameof(roundChanged))]
+    public float roundCountDown = -1f;
+
+    float roundStart = -2f;
 
     // Server Init
     public override void onBegin(Dictionary<NetworkIdentity, string> players)
@@ -44,7 +48,7 @@ public class GameHandler : StateManager
 
         round = 1.0f;
         waveManager.spawnPointList = nodePaths.ToArray();
-        roundStart = Time.realtimeSinceStartup + roundPrep;
+        roundStart = -1f;
     }
 
     public override void onEnter(NetworkConnection conn, string username)
@@ -91,17 +95,23 @@ public class GameHandler : StateManager
                 i++;
             }
 
-            Debug.Log(netPlr.username);
+            netPlr.setClientMoney(netPlr.money);
             netPlr.healthChanged(100, netPlr.hp);
             netPlr.uiAdjust.username.text = netPlr.username;
-            //netPlr.RpcMoney(netPlr.money);
         }
     }
 
     // Client listeners
     public void roundChanged(float oldValue, float newValue)
     {
-        roundText.text = newValue.ToString();
+        if (roundCountDown == -1)
+        {
+            roundText.text = round.ToString();
+        }
+        else
+        {
+            roundText.text = roundCountDown.ToString();
+        }
     }
 
     public void wantPurchase(string towerName, Vector3 position)
@@ -133,13 +143,11 @@ public class GameHandler : StateManager
             tower.AddComponent<TowerHoverHighlight>();
             tower.GetComponent<Tower>().placed = true;
             NetworkServer.Spawn(tower);
-
         }
         else
         {
             Destroy(tower);
         }
-
     }
 
     // Game Logic
@@ -147,16 +155,43 @@ public class GameHandler : StateManager
     private void startRound()
     {
         Debug.Log("Starting Round");
+        waveManager.queueUnit("TestEnemy", 5, 0, 0.2f);
+        waveManager.queueUnit("TestEnemy2", 5, 1, 1f);
+        waveManager.queueUnit("TestEnemy", 10, 1, 0.2f);
         waveManager.startWave();
         roundStart = Time.realtimeSinceStartup + roundPrep * 5;
     }
 
     private void Update()
     {
+        // Game hasn't started yet
+        if (roundStart == -2)
+        {
+            return;
+        }
+
+        // Start preparing for next round
+        if (roundStart == -1 && !waveManager.isWaveOngoing)
+        {
+            roundStart = Time.realtimeSinceStartup + roundPrep;
+            round += 0.1f;
+        }
+
+        // Start the round horde
         if (roundStart != -1 && Time.realtimeSinceStartup >= roundStart)
         {
-            roundStart = -1;
             startRound();
+            roundStart = -1;
+        }
+
+        // Adjust what the client will show
+        if (roundStart == -1)
+        {
+            roundCountDown = -1;
+        }
+        else
+        {
+            roundCountDown = (int)(roundStart - Time.realtimeSinceStartup);
         }
     }
 }

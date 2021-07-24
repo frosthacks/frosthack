@@ -24,11 +24,14 @@ public class WaveManager : NetworkBehaviour
     [Server]
     void Start() {
         WaveManager.Global = this;
+<<<<<<< HEAD
 
         WaveManager.Global.queueUnit("Smoker", 1, 0, 0.2f);
         WaveManager.Global.queueUnit("TestEnemy2", 5, 1, 1f);
         WaveManager.Global.queueUnit("TestEnemy", 10, 1, 0.2f);
         // WaveManager.Global.startWave();
+=======
+>>>>>>> a2fc79c (Added round system, needs to implement difficulty)
     }
 
     [Server]
@@ -52,6 +55,11 @@ public class WaveManager : NetworkBehaviour
             StartCoroutine(spawnUnits(waveInfo));
 
             yield return new WaitForSeconds(waveInfo.pad);
+        }
+
+        while (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
+        {
+            yield return new WaitForSeconds(0.1f);
         }
 
         WaveManager.Global.isWaveOngoing = false;
