@@ -33,7 +33,7 @@ public class CameraController : MonoBehaviour
 
     }
 
-    void SetTarget(Vector2 target)
+    public void SetTarget(Vector2 target)
     {
         hasTarget = true;
         this.target = target;
