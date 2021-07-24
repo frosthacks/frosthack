@@ -7,6 +7,8 @@ using Mirror;
 public class PathTraveller : NetworkBehaviour
 {
     public PathNode destinationNode;
+    public NetworkPlayer attacking;
+    public NetworkPlayer creator;
 
     void Start() {
         
@@ -32,10 +34,24 @@ public class PathTraveller : NetworkBehaviour
     }
 
     [Server]
-    void handleEndOfPath() {
+    void handleEndOfPath()
+    {
+        EnemyData data = GetComponent<Enemy>().data;
+
+        if (attacking != null)
+        {
+            attacking.hp -= data.damage;
+        }
+
+        if (creator != null)
+        {
+            Debug.Log("Reward creator");
+        }
+
         NetworkServer.Destroy(gameObject); 
 
         UserManager.Global.takeDamage(GetComponent<Enemy>().data.damage);
     }
+
 
 }

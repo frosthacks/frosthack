@@ -17,6 +17,7 @@ public class WaveManager : NetworkBehaviour
     public Queue<WaveGroup> waveQueue = new Queue<WaveGroup>();
     public bool isWaveOngoing = false;
     public PathNode[] spawnPointList;
+    public NetworkPlayer[] coresPlayers;
 
     // config
     public float spawnRadius = 0.25f;
@@ -29,7 +30,6 @@ public class WaveManager : NetworkBehaviour
 
     [Server]
     public void startWave() {
-        Debug.Log("Start is now called");
         if (WaveManager.Global.isWaveOngoing) {
             Debug.LogError("There is already a wave ongoing.");
             return;
@@ -43,6 +43,7 @@ public class WaveManager : NetworkBehaviour
         WaveManager.Global.isWaveOngoing = true;
 
         while (WaveManager.Global.waveQueue.Count > 0) {
+
             WaveGroup waveInfo = WaveManager.Global.waveQueue.Dequeue();
 
             StartCoroutine(spawnUnits(waveInfo));
@@ -64,11 +65,16 @@ public class WaveManager : NetworkBehaviour
         for (int i = 0; i < waveInfo.count; i++) {
 
             // create enemy gameobjects and set them up
+            int m = 0;
             foreach (PathNode p in WaveManager.Global.spawnPointList) {
                 Vector3 pos = p.transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
                 GameObject newEnemy = (GameObject)Instantiate(Resources.Load(waveInfo.prefabName), pos, Quaternion.identity);
                 NetworkServer.Spawn(newEnemy);
-                newEnemy.GetComponent<PathTraveller>().destinationNode = p;
+
+                PathTraveller travelCode = newEnemy.GetComponent<PathTraveller>();
+                travelCode.destinationNode = p;
+                travelCode.attacking = coresPlayers[m];
+                m++;
             }
 
             yield return new WaitForSeconds(waveInfo.stagger);
