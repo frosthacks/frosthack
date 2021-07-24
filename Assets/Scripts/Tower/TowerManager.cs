@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 public class TowerManager: MonoBehaviour
 {
     GameObject tower;
+    string prefabName;
 
     void Start() {
         
@@ -26,17 +26,14 @@ public class TowerManager: MonoBehaviour
             // don't place if obstructed
             if (indicator.isObstructed) return;
 
-            // spend the money
-            UserManager.Global.spendMoney(tower.GetComponent<Tower>().data.cost);
-            
 
-            tower.GetComponent<Tower>().placed = true;
-            NetworkServer.Spawn(tower);//create tower
+
+            //CmdPurchase(prefabName, tower.transform.position);
+            Debug.Log(prefabName);
 
             Destroy(indicator.gameObject);
-
-            // add highlight effect to tower
-            tower.AddComponent<TowerHoverHighlight>();
+            Destroy(tower);
+            prefabName = "";
 
             tower = null;
         }
@@ -49,7 +46,7 @@ public class TowerManager: MonoBehaviour
 
     public void OnCreate(GameObject prefab) {
         tower = Instantiate(prefab, ScreenToWorld(Input.mousePosition), Quaternion.identity);
-        tower.transform.SetParent(GameObject.Find("/Towers").transform);
+        prefabName = prefab.name;
         
         GameObject placeIndicator = (GameObject)Instantiate(Resources.Load("Effects/BuildIndicator"));
         placeIndicator.transform.SetParent(tower.transform, false);

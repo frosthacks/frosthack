@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 public class Tower : MonoBehaviour
 {
     public TowerData data;
     public bool placed = false;
     public float delta = 0;
     public Vector2 enemyPosition;
-    public GameObject enemies;
+    public GameObject[] enemies;
 
     public ComparatorPriority priority = ComparatorPriority.Close;
     public CloseComparator closeComparator;
@@ -21,7 +20,7 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
-        enemies = GameObject.Find("/Enemies");
+        
         closeComparator = new CloseComparator(transform);
         farComparator = new FarComparator(transform);
         strongComparator = new StrongComparator(transform);
@@ -31,11 +30,11 @@ public class Tower : MonoBehaviour
     {
         targetExists = true;
         List<GameObject> inRadius = new List<GameObject>();
-        foreach (Transform enemy in enemies.transform)
+        foreach (GameObject enemy in enemies)
         {
-            if (Vector2.Distance(transform.position, enemy.position) < data.range)
+            if (Vector2.Distance(transform.position, enemy.transform.position) < data.range)
             {
-                inRadius.Add(enemy.gameObject);
+                inRadius.Add(enemy);
 
             }
         }
@@ -93,9 +92,11 @@ public class Tower : MonoBehaviour
     }
     public void act()
     {
+
         delta += Time.deltaTime;
         if (delta > data.atkSpeed)
         {
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
             FindTarget();
             if (!targetExists)
             {
@@ -104,9 +105,8 @@ public class Tower : MonoBehaviour
             delta = 0;
             GameObject projectile = Instantiate(data.projectile, transform.position, Quaternion.identity);
 
-            NetworkServer.Spawn(projectile);
 
-            projectile.transform.SetParent(GameObject.Find("/Projectiles").transform);
+          
             projectile.GetComponent<Projectile>().Shoot(target);
             //projectile.transform.LookAt(Vector3.zero);
         }
