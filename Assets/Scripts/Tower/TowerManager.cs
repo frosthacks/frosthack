@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Mirror;
 public class TowerManager: MonoBehaviour
 {
     GameObject tower;
@@ -28,8 +28,11 @@ public class TowerManager: MonoBehaviour
 
             // spend the money
             UserManager.Global.spendMoney(tower.GetComponent<Tower>().data.cost);
+            
 
             tower.GetComponent<Tower>().placed = true;
+            NetworkServer.Spawn(tower);//create tower
+
             Destroy(indicator.gameObject);
             tower = null;
         }

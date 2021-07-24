@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Mirror;
 public class Tower : MonoBehaviour
 {
     public TowerData data;
@@ -114,7 +114,15 @@ public class Tower : MonoBehaviour
         {
             return;
         }
-        
+
+        act();
+
+
+
+
+    }
+    public void act()
+    {
         delta += Time.deltaTime;
         if (delta > data.atkSpeed)
         {
@@ -124,14 +132,13 @@ public class Tower : MonoBehaviour
                 return;
             }
             delta = 0;
-            GameObject projectile = Instantiate(data.projectile,transform.position,Quaternion.identity);
+            GameObject projectile = Instantiate(data.projectile, transform.position, Quaternion.identity);
+
+            NetworkServer.Spawn(projectile);
+
             projectile.transform.SetParent(GameObject.Find("/Projectiles").transform);
             projectile.GetComponent<Projectile>().Shoot(target);
             //projectile.transform.LookAt(Vector3.zero);
         }
-
-
-
-
     }
 }
