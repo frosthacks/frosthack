@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     public Rigidbody2D rb;
     public Vector2 iniPos;
     
+    
 
     
     // Start is called before the first frame update
@@ -30,6 +31,26 @@ public class Projectile : MonoBehaviour
 
 
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        enemy.data.health -= data.damage;
+        data.durability -= 1;
+        if (enemy.data.health < 0)
+        {
+            Destroy(collision.gameObject);
+        }
+        if (data.durability <= 0)
+        {
+            Destroy(gameObject);
+
+        }
+        
+       
+
+
+    }
     public void Update()
     {
         if (Vector2.Distance(transform.position, iniPos) > data.maxDistance)
@@ -37,8 +58,5 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
-    }
+    
 }

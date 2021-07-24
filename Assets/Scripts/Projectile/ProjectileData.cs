@@ -10,5 +10,5 @@ public class ProjectileData : ScriptableObject
     public int speed;
     public int damage;
     public int maxDistance;
-
+    public int durability;
 }
