@@ -3,31 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct playerData{
-    public string username;
-    public Vector3 mapCenter;
-    public int money;
-}
-
 public class GameHandler : StateManager
 {
     public GameObject playerSlots;
-    Dictionary<NetworkIdentity, playerData> allPlayers;
-
+    List<NetworkIdentity> allPlayers;
     public override void onBegin(Dictionary<NetworkIdentity, string> players)
     {
-        allPlayers = new Dictionary<NetworkIdentity, playerData>();
+        allPlayers = new List<NetworkIdentity>();
         int c = 0;
         foreach (KeyValuePair<NetworkIdentity, string> plr in players)
         {
-            playerData newPlr = new playerData {
-                username = plr.Value,
-                mapCenter = playerSlots.transform.GetChild(c).position,
-                money = 200
-            };
+            NetworkPlayer netPlr = plr.Key.gameObject.GetComponent<NetworkPlayer>();
+            allPlayers.Add(plr.Key);
 
-            allPlayers.Add(plr.Key, newPlr);
-            SetPlayerData(plr.Key.connectionToClient, newPlr);
             c++;
         }
     }
@@ -42,15 +30,4 @@ public class GameHandler : StateManager
         throw new System.NotImplementedException();
     }
 
-
-    // Client Sided
-    public GameObject mainCamera;
-    public playerData clientPlayer;
-
-    [TargetRpc]
-    public void SetPlayerData(NetworkConnection target, playerData newinfo)
-    {
-        clientPlayer = newinfo;
-        mainCamera.transform.position = newinfo.mapCenter + new Vector3(0, 0, -10);
-    }
 }
