@@ -18,7 +18,8 @@ public class TowerSpawner : MonoBehaviour
         if (tower != null)
         {
             tower.transform.position = ScreenToWorld(Input.mousePosition);
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0))
+            {
                 PlaceableIndicator indicator = tower.GetComponentInChildren<PlaceableIndicator>();
 
                 // don't place if obstructed
@@ -38,6 +39,7 @@ public class TowerSpawner : MonoBehaviour
             }
 
         }
+    }
 
     public void OnCreate(GameObject prefab) {
         tower = Instantiate(prefab, ScreenToWorld(Input.mousePosition), Quaternion.identity);
@@ -51,16 +53,7 @@ public class TowerSpawner : MonoBehaviour
     }
 
 
-    }
-    public void OnCreate(GameObject prefab)
-    {
-        tower = Instantiate(prefab, ScreenToWorld(Input.mousePosition), Quaternion.identity);
-        
-        
-        
-        
-
-    }
+    
     public Vector3 ScreenToWorld(Vector3 mousePos)
     {
         Vector3 stw = Camera.main.ScreenToWorldPoint(Input.mousePosition);
