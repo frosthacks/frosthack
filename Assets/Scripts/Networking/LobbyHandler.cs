@@ -54,8 +54,8 @@ public class LobbyHandler : StateManager
 
         if (readyPlayers.Count == allPlayers.Count)
         {
-            game.onBegin(allPlayers);
             Debug.Log("Time to start game");
+            game.onBegin(allPlayers);
         }
     }
 
@@ -65,6 +65,11 @@ public class LobbyHandler : StateManager
     [ClientRpc]
     public void RpcDisplayCount(int active, int total)
     {
+        if (active == total) // switch for now
+        {
+            lobbyMenu.SetActive(false);
+        }
+
         readyText.text = "Ready (" + active + "/" + total + ")";
     }
 
