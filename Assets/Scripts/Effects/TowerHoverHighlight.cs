@@ -5,22 +5,22 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class TowerHoverHighlight : MonoBehaviour
 {
-    Renderer renderer;
+    Renderer rend;
     Shader outlineShader;
     Shader defaultShader;
 
     void Start() {
-        renderer = GetComponent<Renderer>();
+        rend = GetComponent<Renderer>();
         outlineShader = Shader.Find("Shader Graphs/OutlineShader");
         defaultShader = Shader.Find("Sprites/Default");
     }
 
     void OnMouseOver() {
-        renderer.material.shader = outlineShader;
+        rend.material.shader = outlineShader;
     }
 
     void OnMouseExit() {
-        renderer.material.shader = defaultShader;
+        rend.material.shader = defaultShader;
     }
 
 }

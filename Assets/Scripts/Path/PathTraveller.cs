@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 [RequireComponent(typeof(Enemy))]
 public class PathTraveller : MonoBehaviour
@@ -30,7 +31,7 @@ public class PathTraveller : MonoBehaviour
     }
 
     void handleEndOfPath() {
-        Destroy(gameObject); 
+        NetworkServer.Destroy(gameObject); 
 
         UserManager.Global.takeDamage(GetComponent<Enemy>().data.damage);
     }

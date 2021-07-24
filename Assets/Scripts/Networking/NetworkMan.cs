@@ -25,6 +25,27 @@ public class NetworkMan : NetworkManager
         currentState = lobby;
     }
 
+    public void changeRoomState()
+    {
+        status = status == gameStatus.lobby ? gameStatus.ongoing : gameStatus.lobby;
+        if (status == gameStatus.lobby)
+        {
+            currentState = lobby;
+        }
+        else
+        {
+            currentState = game;
+        }
+
+        Dictionary<NetworkIdentity, string> beginTable = new Dictionary<NetworkIdentity, string>();
+        foreach(KeyValuePair<NetworkConnection, string> conn in players)
+        {
+            beginTable.Add(conn.Key.identity, conn.Value);
+        }
+
+        currentState.onBegin(beginTable);
+    }
+
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -33,7 +54,6 @@ public class NetworkMan : NetworkManager
 
     public override void OnServerConnect(NetworkConnection conn)
     {
-        Debug.Log("Something connected");
         players.Add(conn, "John Doe");
         base.OnServerConnect(conn);
     }
@@ -51,7 +71,6 @@ public class NetworkMan : NetworkManager
         currentState.onEnter(conn, message.name);
 
     }
-
 
     // Client Sided functionalities 
     public NetworkHandler handler;

@@ -34,6 +34,10 @@ public class TowerManager: MonoBehaviour
             NetworkServer.Spawn(tower);//create tower
 
             Destroy(indicator.gameObject);
+
+            // add highlight effect to tower
+            tower.AddComponent<TowerHoverHighlight>();
+
             tower = null;
         }
         if (Input.GetMouseButtonDown(1)) {

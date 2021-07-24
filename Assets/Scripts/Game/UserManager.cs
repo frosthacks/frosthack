@@ -6,8 +6,8 @@ public class UserManager : MonoBehaviour
 {
     public static UserManager Global;
 
-    public static int baseHealth = 200;
-    public static int baseMoney = 1000;
+    public static int baseHealth = 100;
+    public static int baseMoney = 200;
 
     public int health;
     public int money;
