@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class PurchaseDisable : MonoBehaviour
 {
     public GameObject prefab;
-    public Button button;
+    Button button;
     // Start is called before the first frame update
     void Start()
     {
+        button = GetComponent<Button>();
         
     }
     int GetPrefabCost()

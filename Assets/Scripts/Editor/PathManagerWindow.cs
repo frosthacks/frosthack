@@ -52,8 +52,10 @@ public class PathManagerWindow : EditorWindow
             if (Selection.activeGameObject?.GetComponent<PathNode>() != null) {
                 prevNode = Selection.activeGameObject.GetComponent<PathNode>();
             }
+            newPathNode.transform.position = prevNode.transform.position + new Vector3(1, 0, 0);
             prevNode.nextNodes.Add(newPathNode.GetComponent<PathNode>());
         }
+
 
         Selection.activeGameObject = newPathNode;
 
