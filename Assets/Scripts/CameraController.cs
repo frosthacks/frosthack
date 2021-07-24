@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         initialSize = cam.orthographicSize;
         
     }
-    void SetOrigin(Vector2 origin)
+    public void SetOrigin(Vector2 origin)
     {
         this.origin = origin;
         SetTarget(origin);
@@ -74,13 +74,13 @@ public class CameraController : MonoBehaviour
     }
     void PanCamera()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Debug.Log(true);
             dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
 
         }
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
             cam.transform.position += difference;
@@ -92,7 +92,7 @@ public class CameraController : MonoBehaviour
         float zoom = Input.GetAxis("Mouse ScrollWheel");
         if (zoom != 0f)
         {
-            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + Mathf.Sign(zoom) * zoomStep, minCamSize, maxCamSize);
+            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - Mathf.Sign(zoom) * zoomStep, minCamSize, maxCamSize);
 
         }
         
