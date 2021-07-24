@@ -9,6 +9,7 @@ public class NetworkHandler : MonoBehaviour
     public enum BuildType { Server, WebClient, HostTest};
     public TMP_InputField usernameField;
     public NetworkManager manager;
+    public TMP_Text usernameText;
     public BuildType BuildAs;
     public string username;
 
@@ -25,7 +26,8 @@ public class NetworkHandler : MonoBehaviour
 
     public void joinGame()
     {
-        username = usernameField.text == "" ? "John Doe" : usernameField.text; // send this over later
+        username = usernameField.text == "" ? "John Doe" : usernameField.text;
+        usernameText.text = "Welcome, " + username + "!";
         manager.StartClient();
     }
 }

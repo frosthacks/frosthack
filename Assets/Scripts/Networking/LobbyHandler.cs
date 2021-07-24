@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using TMPro;
+using UnityEngine.UI;
 
 public class LobbyHandler : StateManager
 {
@@ -18,13 +19,13 @@ public class LobbyHandler : StateManager
             allPlayers.Add(plr.Key, plr.Value);
         }
 
-        RpcDisplayCount(readyPlayers.Count, allPlayers.Count);
+        updateClients();
     }
 
     public override void onEnter(NetworkConnection conn, string username)
     {
         allPlayers.Add(conn.identity, username);
-        RpcDisplayCount(readyPlayers.Count, allPlayers.Count);
+        updateClients();
     }
 
     public override void onLeave(NetworkConnection conn)
@@ -35,10 +36,26 @@ public class LobbyHandler : StateManager
             readyPlayers.Remove(conn.identity);
         }
 
-        RpcDisplayCount(readyPlayers.Count, allPlayers.Count);
+        updateClients();
     }
 
     // Server functions
+    private void updateClients()
+    {
+        string[] names = new string[allPlayers.Count];
+        bool[] actives = new bool[allPlayers.Count];
+        int i = 0;
+
+        foreach (KeyValuePair<NetworkIdentity, string> plr in allPlayers)
+        {
+            names[i] = plr.Value;
+            actives[i] = readyPlayers.Contains(plr.Key);
+            i++;
+        }
+
+        RpcDisplayCount(names, actives);
+    }
+
     [Command(requiresAuthority = false)]
     public void toggle(NetworkConnectionToClient sender = null)
     {
@@ -50,7 +67,8 @@ public class LobbyHandler : StateManager
         {
             readyPlayers.Add(sender.identity);
         }
-        RpcDisplayCount(readyPlayers.Count, allPlayers.Count);
+
+        updateClients();
 
         if (readyPlayers.Count == allPlayers.Count)
         {
@@ -60,35 +78,66 @@ public class LobbyHandler : StateManager
     }
 
     // Client functions
-    public TMP_Text readyText;
+    public GameObject EntranceMenu;
+    public GameObject lobbyMenu;
+    public GameObject lobbyPlayers;
+    public GameObject buttonPrefab;
+
+    Color yellow = new Color(255 / 255f, 253 / 255f, 116 / 255f);
+    Color green = new Color(26 / 255f, 234 / 255f, 26 / 255f);
 
     [ClientRpc]
-    public void RpcDisplayCount(int active, int total)
+    public void RpcDisplayCount(string[] players, bool[] readyStates)
     {
-        if (active == total) // switch for now
+
+        // make sure the correct UI is hidden/displayed
+        if (EntranceMenu.activeSelf)
+        {
+            EntranceMenu.SetActive(false);
+        }
+
+        if (!lobbyMenu.activeSelf)
+        {
+
+            lobbyMenu.SetActive(true);
+        }
+
+        // make the player folder
+        foreach (Transform child in lobbyPlayers.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            GameObject button = Instantiate(buttonPrefab, lobbyPlayers.transform);
+            RectTransform rect = button.GetComponent<RectTransform>();
+            rect.position = rect.position + new Vector3(0, -35 * i, 0);
+
+            button.transform.GetChild(0).GetComponent<TMP_Text>().text = players[i];
+            button.GetComponent<Image>().color = readyStates[i] ? green : yellow;
+        }
+
+        // check to see if we are finished
+        bool finished = true;
+        foreach (bool ready in readyStates)
+        {
+            if (!ready)
+            {
+                finished = false;
+            }
+        }
+
+        if (finished)
         {
             lobbyMenu.SetActive(false);
         }
-
-        readyText.text = "Ready (" + active + "/" + total + ")";
     }
 
-    Color green = new Color(26/255f, 234/255f, 26/255f);
-    Color yellow = new Color(255/255f, 253/255f, 116/255f);
-    bool ready = false;
+    
+
     public void onReadyClick()
     {
-        ready = !ready;
-        readyText.color = ready ? green : yellow;
         toggle();
-    }
-
-    public GameObject EntranceMenu;
-    public GameObject lobbyMenu;
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-        EntranceMenu.SetActive(false);
-        lobbyMenu.SetActive(true);
     }
 }
