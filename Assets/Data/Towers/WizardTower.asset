@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Wizard Tower
   description: Shoots bolts of lightning
-  range: 100
+  range: 3
+  placeRadius: 1
   atkSpeed: 5
   projectile: {fileID: 6509162399627288548, guid: c049e69688e694fc29fe6ab7e1acaaac, type: 3}
   upgrades: []
