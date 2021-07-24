@@ -32,6 +32,13 @@ public class PathManagerWindow : EditorWindow
         if (GUILayout.Button("New Path Node")) {
             CreatePathNode(); 
         } 
+
+        // GUI.enabled = (Selection.activeGameObject?.GetComponent<PathNode>() != null);
+        // if (GUILayout.Button("Split Node Here")) {
+        //     CreatePathNode(Selection.activeGameObject.GetComponent<PathNode>()); 
+        // }
+
+        // GUI.enabled = true;
     }
 
     void CreatePathNode() {
@@ -40,11 +47,17 @@ public class PathManagerWindow : EditorWindow
 
         // automatically set previous node's next node reference
         if (pathRoot.childCount > 1) {
+
             PathNode prevNode = pathRoot.GetChild(pathRoot.childCount-2).GetComponent<PathNode>();
-            prevNode.nextNode = newPathNode.GetComponent<PathNode>();
+            if (Selection.activeGameObject?.GetComponent<PathNode>() != null) {
+                prevNode = Selection.activeGameObject.GetComponent<PathNode>();
+            }
+            prevNode.nextNodes.Add(newPathNode.GetComponent<PathNode>());
         }
 
         Selection.activeGameObject = newPathNode;
 
     }
+
+
 }

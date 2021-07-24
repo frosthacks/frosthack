@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: TestEnemy
   description: 
-  img: {fileID: 0}
-  speed: 3
+  speed: 1
   reward: 10
   damage: 10
