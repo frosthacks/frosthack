@@ -29,8 +29,10 @@ public class GameHandler : StateManager
     // Server Init
     public override void onBegin(Dictionary<NetworkIdentity, string> players)
     {
-        List<PathNode> nodePaths = new List<PathNode> { };
+        PathNode[] nodePaths = new PathNode[players.Count];
+        NetworkPlayer[] coresPlrs = new NetworkPlayer[players.Count];
         allPlayers = new List<NetworkIdentity>();
+
         int c = 0;
         foreach (KeyValuePair<NetworkIdentity, string> plr in players)
         {
@@ -40,14 +42,16 @@ public class GameHandler : StateManager
             netPlr.location = playArea.position;
             allPlayers.Add(plr.Key);
 
-            nodePaths.Add(playArea.Find("pathroot").Find("pathnode0").GetComponent<PathNode>());
+            coresPlrs[c] = netPlr;
+            nodePaths[c] = playArea.Find("pathroot").Find("pathnode0").GetComponent<PathNode>();
             c++;
         }
 
         RpcInitializeGame(allPlayers.ToArray());
 
+        waveManager.spawnPointList = nodePaths;
+        waveManager.coresPlayers = coresPlrs;
         round = 1.0f;
-        waveManager.spawnPointList = nodePaths.ToArray();
         roundStart = -1f;
     }
 
