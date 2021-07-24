@@ -37,7 +37,7 @@ public class Projectile : NetworkBehaviour
         enemy.health -= data.damage;
         durability -= 1;
         Act();
-        if (enemy.data.health < 0)
+        if (enemy.health < 0)
         {
             Destroy(collision.gameObject);
         }
