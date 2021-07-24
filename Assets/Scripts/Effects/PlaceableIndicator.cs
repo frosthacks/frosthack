@@ -12,20 +12,24 @@ public class PlaceableIndicator : MonoBehaviour
     GameObject attackRadiusCircle;
     GameObject placeRadiusCircle;
 
-    void Start() {
+    void Awake() {
         attackRadiusCircle = transform.Find("AttackRadius").gameObject;
         placeRadiusCircle = transform.Find("PlaceRadius").gameObject;
     }
 
+    public void setRadius(float attackRadius, float placeRadius) {
+        attackRadiusCircle.transform.localScale = new Vector3(attackRadius, attackRadius, 1);
+        placeRadiusCircle.transform.localScale = new Vector3(placeRadius, placeRadius, 1);
+        GetComponentInChildren<CircleCollider2D>().radius = placeRadius/2;
+    }
+
     void OnTriggerEnter2D(Collider2D collisionInfo) {
         isObstructed = true; 
-        Debug.Log("entered collider");
         placeRadiusCircle.GetComponent<SpriteRenderer>().color = PlaceableIndicator.obstructedColor;
     }
 
     void OnTriggerExit2D(Collider2D collisionInfo) {
        isObstructed = false;
-        Debug.Log("exited collider");
        placeRadiusCircle.GetComponent<SpriteRenderer>().color = PlaceableIndicator.unobstructedColor;
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CircleCollider2D))]
 public class Tower : MonoBehaviour
 {
     public TowerData data;
@@ -9,31 +10,12 @@ public class Tower : MonoBehaviour
     public float delta = 0;
     public Vector2 enemyPosition;
 
-
-
-    
-    void Awake()
-    {
-        
-        
-        
-        
-        
-    }
-    // Start is called before the first frame update
     void Start()
     {
-        
-
-        
-
-
-
+        GetComponent<CircleCollider2D>().radius = data.placeRadius/2;
         
     }
 
-    // Update is called once per frame
-    
     void FixedUpdate()
     {
         if (!placed)
