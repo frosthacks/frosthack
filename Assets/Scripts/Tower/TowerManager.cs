@@ -31,6 +31,10 @@ public class TowerManager: MonoBehaviour
 
             tower.GetComponent<Tower>().placed = true;
             Destroy(indicator.gameObject);
+
+            // add highlight effect to tower
+            tower.AddComponent<TowerHoverHighlight>();
+
             tower = null;
         }
         if (Input.GetMouseButtonDown(1)) {

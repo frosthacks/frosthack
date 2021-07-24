@@ -10,9 +10,6 @@ public class Tower : MonoBehaviour
     public Vector2 enemyPosition;
     public GameObject enemies;
 
-
-
-
     public ComparatorPriority priority = ComparatorPriority.Close;
     public CloseComparator closeComparator;
     public FarComparator farComparator;
@@ -22,16 +19,6 @@ public class Tower : MonoBehaviour
     public Vector3 target;
     public bool targetExists;
 
-    
-
-    
-
-
-
-
-    
-   
-    // Start is called before the first frame update
     void Start()
     {
         enemies = GameObject.Find("/Enemies");
@@ -39,13 +26,6 @@ public class Tower : MonoBehaviour
         farComparator = new FarComparator(transform);
         strongComparator = new StrongComparator(transform);
         weakComparator = new WeakComparator(transform);
-        
-
-        
-
-
-
-        
     }
     void FindTarget()
     {
@@ -93,20 +73,10 @@ public class Tower : MonoBehaviour
                 }
         }
         
-
-        
         inRadius.Sort((p1, p2) => comparator.SortBy(p1, p2));
         target = inRadius[0].transform.position;
-        
-
-
-
-
     }
     
-
-    // Update is called once per frame
-
     void FixedUpdate()
     {
         
@@ -130,8 +100,6 @@ public class Tower : MonoBehaviour
             //projectile.transform.LookAt(Vector3.zero);
         }
 
-
-
-
     }
+
 }
