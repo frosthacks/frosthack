@@ -27,10 +27,11 @@ public class WaveManager : MonoBehaviour
         WaveManager.Global.queueUnit("TestEnemy", 5, 0, 0.2f);
         WaveManager.Global.queueUnit("TestEnemy2", 5, 1, 1f);
         WaveManager.Global.queueUnit("TestEnemy", 10, 1, 0.2f);
-        WaveManager.Global.startWave();
+        // WaveManager.Global.startWave();
     }
 
     public void startWave() {
+        Debug.Log("Start is now called");
         if (WaveManager.Global.isWaveOngoing) {
             Debug.LogError("There is already a wave ongoing.");
             return;

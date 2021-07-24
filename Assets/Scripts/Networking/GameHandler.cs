@@ -11,17 +11,21 @@ public class GameHandler : StateManager
     public GameObject extraPlayerUIPrefab;
     public PlayerUIInfo localPlayerUI;
     public UserManager singletonDataStorage;
+    public WaveManager waveManager;
     public GameObject mainCamera;
     public GameObject playersUI;
     public GameObject mapSlots;
     public TMP_Text roundText;
+    public float roundPrep;
 
     [SyncVar(hook = nameof(roundChanged))]
     public float round = 0.0f;
+    float roundStart = -1;
 
     // Server Init
     public override void onBegin(Dictionary<NetworkIdentity, string> players)
     {
+        List<PathNode> nodePaths = new List<PathNode> { };
         allPlayers = new List<NetworkIdentity>();
         int c = 0;
         foreach (KeyValuePair<NetworkIdentity, string> plr in players)
@@ -30,16 +34,17 @@ public class GameHandler : StateManager
             Transform playArea = mapSlots.transform.GetChild(c);
             netPlr.username = plr.Value;
             netPlr.location = playArea.position;
-            Debug.Log("Server location shown " + playArea.position.ToString()); 
-            Debug.Log(netPlr.username);
             allPlayers.Add(plr.Key);
+
+            nodePaths.Add(playArea.Find("pathroot").Find("pathnode0").GetComponent<PathNode>());
             c++;
         }
 
         RpcInitializeGame(allPlayers.ToArray());
 
         round = 1.0f;
-        startRound();
+        waveManager.spawnPointList = nodePaths.ToArray();
+        roundStart = Time.realtimeSinceStartup + roundPrep;
     }
 
     public override void onEnter(NetworkConnection conn, string username)
@@ -124,14 +129,10 @@ public class GameHandler : StateManager
 
         if (plr.money >= cost)
         {
-            Debug.Log("Has enough money");
             plr.incrementMoney(cost * -1);
-
             tower.AddComponent<TowerHoverHighlight>();
             tower.GetComponent<Tower>().placed = true;
-            Debug.Log("About to spawn");
             NetworkServer.Spawn(tower);
-            Debug.Log("Done");
 
         }
         else
@@ -142,30 +143,20 @@ public class GameHandler : StateManager
     }
 
     // Game Logic
-    float waitToDeal = -1;
     [Server]
     private void startRound()
     {
         Debug.Log("Starting Round");
-        Debug.Log("Testing 1");
-        NetworkPlayer tesP = allPlayers[0].gameObject.GetComponent<NetworkPlayer>();
-        tesP.incrementMoney(-50);
-        tesP.hp -= 30;
-        waitToDeal = Time.unscaledTime + 2.5f;
+        waveManager.startWave();
+        roundStart = Time.realtimeSinceStartup + roundPrep * 5;
     }
 
     private void Update()
     {
-        if (waitToDeal != -1)
+        if (roundStart != -1 && Time.realtimeSinceStartup >= roundStart)
         {
-            if (Time.unscaledTime >= waitToDeal)
-            {
-                Debug.Log("Testing 2");
-                waitToDeal = -1;
-                NetworkPlayer tesP = allPlayers[0].gameObject.GetComponent<NetworkPlayer>();
-                tesP.incrementMoney(20);
-                tesP.hp -= 10;
-            }
+            roundStart = -1;
+            startRound();
         }
     }
 }
