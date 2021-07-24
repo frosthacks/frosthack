@@ -8,8 +8,7 @@ public class ProjectileData : ScriptableObject
     public new string name;
     public string description;
     public int speed;
-    public int duration;
     public int damage;
-
+    public int maxDistance;
 
 }

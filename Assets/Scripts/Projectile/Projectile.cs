@@ -6,30 +6,36 @@ public class Projectile : MonoBehaviour
 {
     public ProjectileData data;
     public float delta;
+    public Rigidbody2D rb;
+    public Vector2 iniPos;
+    
+
     
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
+        iniPos = transform.position;
         
     }
     
 
-    // Update is called once per frame
-    void Update()
+    public void Shoot(Vector3 target)
     {
-        delta += Time.deltaTime;
-        if (delta < data.duration)
-        {
-            transform.Translate(transform.forward * data.speed);
+        Vector2 moveDirection = (target - transform.position).normalized*data.speed;
+        rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
 
 
-        }
-        else
-        {
-            Destroy(this);
-        }
         
+
+
+    }
+    public void Update()
+    {
+        if (Vector2.Distance(transform.position, iniPos) > data.maxDistance)
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
