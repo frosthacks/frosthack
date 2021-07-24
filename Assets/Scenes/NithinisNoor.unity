@@ -21090,6 +21090,7 @@ GameObject:
   - component: {fileID: 1509161152}
   - component: {fileID: 1509161151}
   - component: {fileID: 1509161153}
+  - component: {fileID: 1509161154}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -21210,6 +21211,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1509161154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509161149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e58cd42903f43e89d8d0a8f6a6bdfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3128014841885993093, guid: 70cbd0ba1b4844a2ba1ad8babb813ca5, type: 3}
+  button: {fileID: 1509161153}
 --- !u!1 &1513554376
 GameObject:
   m_ObjectHideFlags: 0
@@ -27016,10 +27031,12 @@ MonoBehaviour:
   extraPlayerUIPrefab: {fileID: 7191116618520689822, guid: 2b121f9fa2513824aa134965e5efd1e7, type: 3}
   localPlayerUI: {fileID: 1667503991}
   singletonDataStorage: {fileID: 1839375338}
+  waveManager: {fileID: 0}
   mainCamera: {fileID: 1216133497}
   playersUI: {fileID: 25987533}
   mapSlots: {fileID: 9046543084071065070}
   roundText: {fileID: 232627033}
+  roundPrep: 0
   round: 0
 --- !u!114 &1638935830
 MonoBehaviour:
@@ -30028,6 +30045,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f05df35c8d55c40ae6c38e68992449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   isWaveOngoing: 0
   spawnPointList:
   - {fileID: 0}
