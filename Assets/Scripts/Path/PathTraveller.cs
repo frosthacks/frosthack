@@ -24,7 +24,7 @@ public class PathTraveller : MonoBehaviour
             float moveSpeed = GetComponent<Enemy>().data.speed;
             transform.Translate(destVec.normalized * moveSpeed * Time.deltaTime);
         } else {
-            destinationNode = destinationNode.nextNode;
+            destinationNode = destinationNode.getNextNode();
         }
 
     }
