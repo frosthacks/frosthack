@@ -15,5 +15,6 @@ MonoBehaviour:
   name: fire
   description: balls
   speed: 3
-  damage: 100
+  damage: 1
   maxDistance: 5
+  durability: 0
