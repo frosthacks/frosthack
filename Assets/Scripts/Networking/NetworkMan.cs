@@ -52,7 +52,6 @@ public class NetworkMan : NetworkManager
 
     }
 
-
     // Client Sided functionalities 
     public NetworkHandler handler;
     public override void OnClientConnect(NetworkConnection conn)
