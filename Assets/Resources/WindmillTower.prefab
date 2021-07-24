@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7915582025096912192}
   m_Layer: 6
   m_Name: WindmillTower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +116,8 @@ MonoBehaviour:
   placed: 0
   delta: 0
   enemyPosition: {x: 0, y: 0}
-  enemies: {fileID: 0}
+  enemies:
+  - {fileID: 0}
   priority: 0
   target: {x: 0, y: 0, z: 0}
   targetExists: 0

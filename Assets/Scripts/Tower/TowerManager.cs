@@ -44,6 +44,12 @@ public class TowerManager: MonoBehaviour
     }
 
     public void OnCreate(GameObject prefab) {
+        TowerData towerData = prefab.GetComponent<Tower>().data;
+        if (UserManager.Global.money < towerData.cost)
+        {
+            return;
+        }
+
         tower = Instantiate(prefab, ScreenToWorld(Input.mousePosition), Quaternion.identity);
         prefabName = prefab.name;
         
