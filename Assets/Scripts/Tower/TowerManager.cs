@@ -6,39 +6,38 @@ public class TowerManager: MonoBehaviour
 {
     GameObject tower;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (tower != null)
-        {
-            tower.transform.position = ScreenToWorld(Input.mousePosition);
-            if (Input.GetMouseButtonDown(0))
-            {
-                PlaceableIndicator indicator = tower.GetComponentInChildren<PlaceableIndicator>();
+    void Update() {
 
-                // don't place if obstructed
-                if (indicator.isObstructed) return;
+        if (tower != null) placeTower();
 
-                tower.GetComponent<Tower>().placed = true;
-                Destroy(indicator.gameObject);
-                tower = null;
 
-            }
-            if (Input.GetMouseButtonDown(1))
-            {
-                Debug.Log("right click");
-                Destroy(tower);
-                tower = null;
+    }
 
-            }
+    void placeTower() {
 
+        tower.transform.position = ScreenToWorld(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0)) {
+            PlaceableIndicator indicator = tower.GetComponentInChildren<PlaceableIndicator>();
+
+            // don't place if obstructed
+            if (indicator.isObstructed) return;
+
+            // spend the money
+            UserManager.Global.spendMoney(tower.GetComponent<Tower>().data.cost);
+
+            tower.GetComponent<Tower>().placed = true;
+            Destroy(indicator.gameObject);
+            tower = null;
         }
+        if (Input.GetMouseButtonDown(1)) {
+            Destroy(tower);
+            tower = null;
+        }
+
     }
 
     public void OnCreate(GameObject prefab) {
@@ -52,10 +51,7 @@ public class TowerManager: MonoBehaviour
         indicator.setRadius(tower.GetComponent<Tower>().data.range, tower.GetComponent<Tower>().data.placeRadius);
     }
 
-
-    
-    public Vector3 ScreenToWorld(Vector3 mousePos)
-    {
+    public Vector3 ScreenToWorld(Vector3 mousePos) {
         Vector3 stw = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         return new Vector3(stw.x, stw.y, 0);

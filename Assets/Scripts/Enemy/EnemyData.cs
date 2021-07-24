@@ -6,12 +6,7 @@ public class EnemyData : ScriptableObject
 {
     public new string name;
     public string description;
-    public Sprite img;
-    public int range;
-    public int atkSpeed;
-    public int speed;
-    public GameObject projectile;
-
-    
-    
+    public float speed;
+    public int reward;
+    public int damage;
 }
