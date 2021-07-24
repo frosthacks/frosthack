@@ -28,7 +28,6 @@ public class WaveManager : MonoBehaviour
         WaveManager.Global.queueUnit("TestEnemy2", 5, 1, 1f);
         WaveManager.Global.queueUnit("TestEnemy", 10, 1, 0.2f);
         WaveManager.Global.startWave();
-
     }
 
     public void startWave() {

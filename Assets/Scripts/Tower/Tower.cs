@@ -85,10 +85,6 @@ public class Tower : MonoBehaviour
         }
 
         act();
-
-
-
-
     }
     public void act()
     {

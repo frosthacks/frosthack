@@ -14,6 +14,4 @@ public class TowerData : ScriptableObject
     public List<string> upgrades;
     public bool homing;
     
-    
-    
 }
