@@ -45,8 +45,7 @@ public class Tower : MonoBehaviour
         {
             delta = 0;
             GameObject projectile = Instantiate(data.projectile,transform.position,Quaternion.identity);
-            projectile.transform.forward = 
-
+            //projectile.transform.LookAt(Vector3.zero);
         }
 
 
