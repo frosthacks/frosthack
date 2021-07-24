@@ -11,6 +11,7 @@ public class Projectile : NetworkBehaviour
     public Rigidbody2D rb;
     public Vector2 iniPos;
     public int durability;
+    public bool tbd = false;
     
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,12 @@ public class Projectile : NetworkBehaviour
     [Server]
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (tbd&&!data.aoe)
+        {
+            return;
+        }
+
+
         
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         enemy.health -= data.damage;
@@ -43,6 +50,7 @@ public class Projectile : NetworkBehaviour
         }
         if (durability <= 0)
         {
+            tbd = true;
             if (data.aoe)
             {
                 Destroy(gameObject, 0.05f);
@@ -50,6 +58,7 @@ public class Projectile : NetworkBehaviour
             }
             else
             {
+                
                 Destroy(gameObject);
 
             }
