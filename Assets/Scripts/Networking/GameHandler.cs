@@ -127,7 +127,6 @@ public class GameHandler : StateManager
     [Command(requiresAuthority = false)]
     public void CmdPurchase(string towerName, Vector3 position, NetworkConnectionToClient sender = null)
     {
-        Debug.Log("Purchase attempt");
         NetworkIdentity id = sender.identity;
         GameObject towerpref = Resources.Load<GameObject>(towerName);
 
@@ -144,8 +143,11 @@ public class GameHandler : StateManager
         if (plr.money >= cost)
         {
             plr.incrementMoney(cost * -1);
-            tower.AddComponent<TowerHoverHighlight>();
-            tower.GetComponent<Tower>().placed = true;
+
+            Tower tow = tower.GetComponent<Tower>();
+            tow.creator = plr;
+            tow.placed = true;
+
             NetworkServer.Spawn(tower);
         }
         else

@@ -5,6 +5,7 @@ using Mirror;
 
 public class Tower : NetworkBehaviour
 {
+    public NetworkPlayer creator;
     public TowerData data;
     public bool placed = false;
     public float delta = 0;
@@ -108,9 +109,19 @@ public class Tower : NetworkBehaviour
             GameObject projectile = Instantiate(data.projectile, transform.position, Quaternion.identity);
             NetworkServer.Spawn(projectile);
 
-            projectile.GetComponent<Projectile>().Shoot(target);
+            Projectile shot = projectile.GetComponent<Projectile>();
+            shot.creator = creator;
+            shot.Shoot(target);
             //projectile.transform.LookAt(Vector3.zero);
         }
+    }
+
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        gameObject.AddComponent<TowerHoverHighlight>();
     }
 
 }

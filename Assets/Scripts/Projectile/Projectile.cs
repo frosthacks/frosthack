@@ -6,6 +6,7 @@ using Mirror;
 
 public class Projectile : NetworkBehaviour
 {
+    public NetworkPlayer creator;
     public ProjectileData data;
     public float delta;
     public Rigidbody2D rb;
@@ -46,6 +47,7 @@ public class Projectile : NetworkBehaviour
         Act();
         if (enemy.health <= 0)
         {
+            creator.incrementMoney(enemy.data.reward);
             Destroy(collision.gameObject);
         }
         if (durability <= 0)
