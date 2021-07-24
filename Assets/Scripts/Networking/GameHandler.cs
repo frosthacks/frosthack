@@ -30,7 +30,8 @@ public class GameHandler : StateManager
             Transform playArea = mapSlots.transform.GetChild(c);
             netPlr.username = plr.Value;
             netPlr.location = playArea.position;
-            Debug.Log("Server location shown " + playArea.position.ToString());
+            Debug.Log("Server location shown " + playArea.position.ToString()); 
+            Debug.Log(netPlr.username);
             allPlayers.Add(plr.Key);
             c++;
         }
@@ -71,7 +72,9 @@ public class GameHandler : StateManager
                 netPlr.dataSingleton = singletonDataStorage;
                 netPlr.uiAdjust = localPlayerUI;
 
+                Debug.Log("Set position correctly(?) at " + netPlr.location.ToString());
                 mainCamera.transform.position = netPlr.location + new Vector3(0, 0, -10);
+
             }
             else
             { 
@@ -82,9 +85,10 @@ public class GameHandler : StateManager
                 i++;
             }
 
-            netPlr.uiAdjust.username.text = netPlr.username;
+            Debug.Log(netPlr.username);
             netPlr.healthChanged(100, netPlr.hp);
-            netPlr.RpcMoney(netPlr.money);
+            netPlr.uiAdjust.username.text = netPlr.username;
+            //netPlr.RpcMoney(netPlr.money);
         }
     }
 

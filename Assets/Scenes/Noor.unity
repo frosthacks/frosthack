@@ -4991,7 +4991,7 @@ MonoBehaviour:
   usernameField: {fileID: 1891414562}
   manager: {fileID: 321056461}
   usernameText: {fileID: 450930329}
-  BuildAs: 2
+  BuildAs: 0
   username: tester
 --- !u!114 &321056460
 MonoBehaviour:
