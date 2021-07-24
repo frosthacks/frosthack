@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class LobbyHandler : StateManager
 {
-    public GameHandler game;
+    public NetworkMan networkOverlord;
     Dictionary<NetworkIdentity, string> allPlayers = new Dictionary<NetworkIdentity, string>();
     HashSet<NetworkIdentity> readyPlayers = new HashSet<NetworkIdentity>();
     // State functionalities
@@ -73,13 +73,17 @@ public class LobbyHandler : StateManager
         if (readyPlayers.Count == allPlayers.Count)
         {
             Debug.Log("Time to start game");
-            game.onBegin(allPlayers);
+            networkOverlord.changeRoomState();
+
+            // remove any lobby remaining things
         }
     }
 
     // Client functions
     public GameObject EntranceMenu;
     public GameObject lobbyMenu;
+    public GameObject gameMenu;
+
     public GameObject lobbyPlayers;
     public GameObject buttonPrefab;
 
@@ -131,6 +135,7 @@ public class LobbyHandler : StateManager
         if (finished)
         {
             lobbyMenu.SetActive(false);
+            gameMenu.SetActive(true);
         }
     }
 
