@@ -684,6 +684,7 @@ MonoBehaviour:
   healthText: {fileID: 8278968854222731738}
   healthFill: {fileID: 3478813665735305876}
   cashText: {fileID: 0}
+  changeOrigin: {fileID: 2271729274984477134}
 --- !u!1 &7442433433004987579
 GameObject:
   m_ObjectHideFlags: 0

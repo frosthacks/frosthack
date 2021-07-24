@@ -63,6 +63,7 @@ public class GameHandler : StateManager
         }
 
         // link listener UIs
+        CameraController camControl = mainCamera.GetComponent<CameraController>();
         int i = 0;
         foreach (NetworkIdentity id in playerIDs)
         {
@@ -71,9 +72,7 @@ public class GameHandler : StateManager
             {
                 netPlr.dataSingleton = singletonDataStorage;
                 netPlr.uiAdjust = localPlayerUI;
-
-                Debug.Log("Set position correctly(?) at " + netPlr.location.ToString());
-                mainCamera.transform.position = netPlr.location + new Vector3(0, 0, -10);
+                netPlr.locationChanged(new Vector3(), netPlr.location);
 
             }
             else
@@ -82,6 +81,8 @@ public class GameHandler : StateManager
                 GameObject plrUI = Instantiate(extraPlayerUIPrefab, playersUI.transform);
                 plrUI.transform.position = plrUI.transform.position + new Vector3(0, -75 * i, 0);
                 netPlr.uiAdjust = plrUI.GetComponent<PlayerUIInfo>();
+
+                netPlr.uiAdjust.changeOrigin.onClick.AddListener(() => camControl.SetTarget(new Vector2(netPlr.location.x, netPlr.location.y)));
                 i++;
             }
 

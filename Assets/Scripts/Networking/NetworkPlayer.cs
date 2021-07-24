@@ -17,16 +17,11 @@ public class NetworkPlayer : NetworkBehaviour
         if (uiAdjust != null)
         {
             uiAdjust.username.text = newValue;
-            Debug.Log("Username was set after init");
-        }
-        else
-        {
-            Debug.Log("Username should be set safely now");
         }
     }
 
     [SyncVar(hook = nameof(locationChanged))]
-    public Vector3 location;
+    public Vector3 location = new Vector3();
 
     public void locationChanged(Vector3 oldValue, Vector3 newValue)
     {
@@ -34,12 +29,9 @@ public class NetworkPlayer : NetworkBehaviour
         {
             if (uiAdjust != null)
             {
-                GameObject.Find("Main Camera").transform.position = newValue + new Vector3(0, 0, -10);
-                Debug.Log("Location was set after init");
-            }
-            else
-            {
-                Debug.Log("Location should be set safely now");
+                GameObject cam = GameObject.Find("Main Camera");
+                cam.transform.position = newValue + new Vector3(0, 0, -10);
+                cam.GetComponent<CameraController>().SetOrigin(new Vector2(newValue.x, newValue.y));
             }
         }
     }
