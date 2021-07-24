@@ -23,7 +23,7 @@ public class NetworkPlayer : NetworkBehaviour
 
     
 
-    void healthChanged()
+    public void healthChanged(int oldValue, int newValue)
     {
         dataSingleton.hp = hp;
     }
