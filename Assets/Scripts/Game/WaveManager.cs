@@ -22,16 +22,9 @@ public class WaveManager : NetworkBehaviour
     public float spawnRadius = 0.25f;
 
     [Server]
-    void Start() {
+    void Start()
+    {
         WaveManager.Global = this;
-<<<<<<< HEAD
-
-        WaveManager.Global.queueUnit("Smoker", 1, 0, 0.2f);
-        WaveManager.Global.queueUnit("TestEnemy2", 5, 1, 1f);
-        WaveManager.Global.queueUnit("TestEnemy", 10, 1, 0.2f);
-        // WaveManager.Global.startWave();
-=======
->>>>>>> a2fc79c (Added round system, needs to implement difficulty)
     }
 
     [Server]
