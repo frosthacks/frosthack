@@ -25,7 +25,7 @@ public class WaveManager : NetworkBehaviour
     void Start() {
         WaveManager.Global = this;
 
-        WaveManager.Global.queueUnit("TestEnemy", 5, 0, 0.2f);
+        WaveManager.Global.queueUnit("Smoker", 1, 0, 0.2f);
         WaveManager.Global.queueUnit("TestEnemy2", 5, 1, 1f);
         WaveManager.Global.queueUnit("TestEnemy", 10, 1, 0.2f);
         // WaveManager.Global.startWave();
