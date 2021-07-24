@@ -10,12 +10,14 @@ public class Projectile : NetworkBehaviour
     public float delta;
     public Rigidbody2D rb;
     public Vector2 iniPos;
+    public int durability;
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         iniPos = transform.position;
+        durability = data.durability;
         
     }
     
@@ -32,17 +34,33 @@ public class Projectile : NetworkBehaviour
     {
         
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        enemy.data.health -= data.damage;
-        data.durability -= 1;
+        enemy.health -= data.damage;
+        durability -= 1;
+        Act();
         if (enemy.data.health < 0)
         {
             Destroy(collision.gameObject);
         }
-        if (data.durability <= 0)
+        if (durability <= 0)
         {
-            Destroy(gameObject);
+            if (data.aoe)
+            {
+                Destroy(gameObject, 0.05f);
+                
+            }
+            else
+            {
+                Destroy(gameObject);
+
+            }
+            
 
         }
+    }
+    [Server]
+    public void Act()
+    {
+
     }
 
     [Server]

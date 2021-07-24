@@ -27031,13 +27031,14 @@ MonoBehaviour:
   extraPlayerUIPrefab: {fileID: 7191116618520689822, guid: 2b121f9fa2513824aa134965e5efd1e7, type: 3}
   localPlayerUI: {fileID: 1667503991}
   singletonDataStorage: {fileID: 1839375338}
-  waveManager: {fileID: 0}
+  waveManager: {fileID: 1839375340}
   mainCamera: {fileID: 1216133497}
   playersUI: {fileID: 25987533}
   mapSlots: {fileID: 9046543084071065070}
   roundText: {fileID: 232627033}
   roundPrep: 0
   round: 0
+  roundCountDown: -1
 --- !u!114 &1638935830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29999,6 +30000,7 @@ GameObject:
   - component: {fileID: 1839375340}
   - component: {fileID: 1839375339}
   - component: {fileID: 1839375338}
+  - component: {fileID: 1839375342}
   m_Layer: 0
   m_Name: GlobalManager
   m_TagString: Untagged
@@ -30065,6 +30067,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1839375342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839375337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2841374590
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &1839588090
 GameObject:
   m_ObjectHideFlags: 0
