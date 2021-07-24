@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class TowerManager: MonoBehaviour
 {
+    public GameHandler gameManager;
     GameObject tower;
     string prefabName;
 
@@ -26,9 +27,7 @@ public class TowerManager: MonoBehaviour
             // don't place if obstructed
             if (indicator.isObstructed) return;
 
-
-
-            //CmdPurchase(prefabName, tower.transform.position);
+            gameManager.wantPurchase(prefabName, tower.transform.position);
             Debug.Log(prefabName);
 
             Destroy(indicator.gameObject);

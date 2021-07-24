@@ -93,9 +93,52 @@ public class GameHandler : StateManager
         }
     }
 
+    // Client listeners
     public void roundChanged(float oldValue, float newValue)
     {
         roundText.text = newValue.ToString();
+    }
+
+    public void wantPurchase(string towerName, Vector3 position)
+    {
+        CmdPurchase(towerName, position);
+    }
+
+    // Purchase command
+    [Command(requiresAuthority = false)]
+    public void CmdPurchase(string towerName, Vector3 position, NetworkConnectionToClient sender = null)
+    {
+        Debug.Log("Purchase attempt");
+        NetworkIdentity id = sender.identity;
+        GameObject towerpref = Resources.Load<GameObject>(towerName);
+
+        if (towerpref == null)
+        {
+            Debug.Log("Rescource could not be found");
+            return;
+        }
+
+        GameObject tower = Instantiate(towerpref, position, Quaternion.identity);
+        int cost = tower.GetComponent<Tower>().data.cost;
+        NetworkPlayer plr = id.gameObject.GetComponent<NetworkPlayer>();
+
+        if (plr.money >= cost)
+        {
+            Debug.Log("Has enough money");
+            plr.incrementMoney(cost * -1);
+
+            tower.AddComponent<TowerHoverHighlight>();
+            tower.GetComponent<Tower>().placed = true;
+            Debug.Log("About to spawn");
+            NetworkServer.Spawn(tower);
+            Debug.Log("Done");
+
+        }
+        else
+        {
+            Destroy(tower);
+        }
+
     }
 
     // Game Logic

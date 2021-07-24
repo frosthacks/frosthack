@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Wizard Tower
   description: Shoots bolts of lightning
-  cost: 0
+  cost: 45
   range: 3
   placeRadius: 0.75
   atkSpeed: 1
