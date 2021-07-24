@@ -18,10 +18,14 @@ public class TowerSpawner : MonoBehaviour
         if (tower != null)
         {
             tower.transform.position = ScreenToWorld(Input.mousePosition);
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("left Click");
+            if (Input.GetMouseButtonDown(0)) {
+                PlaceableIndicator indicator = tower.GetComponentInChildren<PlaceableIndicator>();
+
+                // don't place if obstructed
+                if (indicator.isObstructed) return;
+
                 tower.GetComponent<Tower>().placed = true;
+                Destroy(indicator.gameObject);
                 tower = null;
 
             }
@@ -35,13 +39,23 @@ public class TowerSpawner : MonoBehaviour
 
         }
 
+    public void OnCreate(GameObject prefab) {
+        tower = Instantiate(prefab, ScreenToWorld(Input.mousePosition), Quaternion.identity);
+        tower.transform.SetParent(GameObject.Find("/Towers").transform);
+        
+        GameObject placeIndicator = (GameObject)Instantiate(Resources.Load("Effects/BuildIndicator"));
+        placeIndicator.transform.SetParent(tower.transform, false);
+
+        PlaceableIndicator indicator = placeIndicator.GetComponent<PlaceableIndicator>(); 
+        indicator.setRadius(tower.GetComponent<Tower>().data.range, tower.GetComponent<Tower>().data.placeRadius);
+    }
 
 
     }
     public void OnCreate(GameObject prefab)
     {
         tower = Instantiate(prefab, ScreenToWorld(Input.mousePosition), Quaternion.identity);
-        tower.transform.SetParent(GameObject.Find("/Towers").transform);
+        
         
         
         
