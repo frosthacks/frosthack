@@ -10,7 +10,7 @@ public struct WaveGroup {
     public float stagger; // time between spawning units of the same wave
 }
 
-public class WaveManager : MonoBehaviour
+public class WaveManager : NetworkBehaviour
 {
     public static WaveManager Global;
 
@@ -21,16 +21,19 @@ public class WaveManager : MonoBehaviour
     // config
     public float spawnRadius = 0.25f;
 
+    [Server]
     void Start() {
         WaveManager.Global = this;
 
         WaveManager.Global.queueUnit("TestEnemy", 5, 0, 0.2f);
         WaveManager.Global.queueUnit("TestEnemy2", 5, 1, 1f);
         WaveManager.Global.queueUnit("TestEnemy", 10, 1, 0.2f);
-        WaveManager.Global.startWave();
+        // WaveManager.Global.startWave();
     }
 
+    [Server]
     public void startWave() {
+        Debug.Log("Start is now called");
         if (WaveManager.Global.isWaveOngoing) {
             Debug.LogError("There is already a wave ongoing.");
             return;
@@ -38,6 +41,7 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(spawnUnitWave());
     }
 
+    [Server]
     private IEnumerator spawnUnitWave() {
 
         WaveManager.Global.isWaveOngoing = true;
@@ -53,14 +57,16 @@ public class WaveManager : MonoBehaviour
         WaveManager.Global.isWaveOngoing = false;
     }
 
+    [Server]
     private IEnumerator spawnUnits(WaveGroup waveInfo) {
 
         for (int i = 0; i < waveInfo.count; i++) {
 
             // create enemy gameobjects and set them up
             foreach (PathNode p in WaveManager.Global.spawnPointList) {
-                GameObject newEnemy = (GameObject)Instantiate(Resources.Load(waveInfo.prefabName));
-                newEnemy.transform.position = p.transform.position+new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
+                Vector3 pos = p.transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
+                GameObject newEnemy = (GameObject)Instantiate(Resources.Load(waveInfo.prefabName), pos, Quaternion.identity);
+                NetworkServer.Spawn(newEnemy);
                 newEnemy.GetComponent<PathTraveller>().destinationNode = p;
             }
 
@@ -68,11 +74,12 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    [Server]
     public void queueUnit(string prefabName, int count, float pad, float stagger) {
         WaveManager.Global.waveQueue.Enqueue(new WaveGroup {prefabName=prefabName, count=count, pad=pad, stagger=stagger});
     }
 
-    // spawn units without waiting
+    [Server]
     public void spawnUnit(string prefabName, int count, float stagger) {
         if (!WaveManager.Global.isWaveOngoing) {
             Debug.LogError("There is no ongoing wave.");

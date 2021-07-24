@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Tower : MonoBehaviour
+using Mirror;
+
+public class Tower : NetworkBehaviour
 {
     public TowerData data;
     public bool placed = false;
@@ -20,12 +22,13 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
-        
         closeComparator = new CloseComparator(transform);
         farComparator = new FarComparator(transform);
         strongComparator = new StrongComparator(transform);
         weakComparator = new WeakComparator(transform);
     }
+
+    [Server]
     void FindTarget()
     {
         targetExists = true;
@@ -76,6 +79,7 @@ public class Tower : MonoBehaviour
         target = inRadius[0].transform.position;
     }
     
+    [Server]
     void FixedUpdate()
     {
         
@@ -86,6 +90,8 @@ public class Tower : MonoBehaviour
 
         act();
     }
+
+    [Server]
     public void act()
     {
 
@@ -100,9 +106,8 @@ public class Tower : MonoBehaviour
             }
             delta = 0;
             GameObject projectile = Instantiate(data.projectile, transform.position, Quaternion.identity);
+            NetworkServer.Spawn(projectile);
 
-
-          
             projectile.GetComponent<Projectile>().Shoot(target);
             //projectile.transform.LookAt(Vector3.zero);
         }
