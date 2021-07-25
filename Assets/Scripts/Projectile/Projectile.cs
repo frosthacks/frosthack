@@ -27,10 +27,8 @@ public class Projectile : NetworkBehaviour
     public void Shoot(Vector3 target)
     {
         Vector2 moveDirection = (target - transform.position).normalized*data.speed;
-        
         rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
-        transform.rotation = Quaternion.LookRotation(rb.velocity);
-
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan(moveDirection.y / moveDirection.x) * Mathf.Rad2Deg);
 
     }
 
