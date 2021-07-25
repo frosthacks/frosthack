@@ -18,4 +18,4 @@ MonoBehaviour:
   damage: 1
   maxDistance: 5
   durability: 0
-  aoe: 0
+  aoe: 1

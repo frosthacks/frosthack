@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Smoker
   description: Leaves trails of smoke that obstruct your path
-  speed: 2
-  reward: 20
-  damage: 10
+  speed: 1.8
+  reward: 3
+  damage: 4
   health: 2
   cost: 0

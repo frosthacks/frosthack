@@ -221,12 +221,12 @@ public class GameHandler : StateManager
 
     Dictionary<string, int> unitPriorities = new Dictionary<string, int> {
         { "MinionLv1", 1 },
-        {"Smoker", 1},
-        {"HellHound", 1},
-        {"HellHoundCarriage", 1},
-        {"HellHoundConvoy", 1},
+        {"Smoker", 2},
+        {"HellHound", 2},
+        {"HellHoundCarriage", 3},
         {"Slime", 3},
         { "MinionLv2", 3 },
+        {"HellHoundConvoy", 5},
         { "MinionLv3", 8 },
         { "JoggerLv1", 3 },
         { "JoggerLv2", 8 },

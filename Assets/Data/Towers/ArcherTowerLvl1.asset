@@ -17,7 +17,7 @@ MonoBehaviour:
   cost: 90
   range: 3
   placeRadius: 1
-  atkSpeed: 1
+  atkSpeed: 0.5
   projectile: {fileID: 4596289214406939329, guid: 3e9401477846529468e0d1b094e7728d, type: 3}
   upgradeTo: {fileID: 3128014841885993093, guid: f14f78e3ea08efe47aaaf7e01aa24e58, type: 3}
   homing: 0
