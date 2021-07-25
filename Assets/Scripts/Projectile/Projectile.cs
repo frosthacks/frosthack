@@ -44,6 +44,9 @@ public class Projectile : NetworkBehaviour
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         enemy.health -= data.damage;
         durability -= 1;
+        Debug.Log(gameObject.name);
+        Debug.Log(durability);
+
         Act();
         if (enemy.health <= 0)
         {
@@ -52,6 +55,7 @@ public class Projectile : NetworkBehaviour
         }
         if (durability <= 0)
         {
+            OnDie();
             tbd = true;
             if (data.aoe)
             {
@@ -69,10 +73,16 @@ public class Projectile : NetworkBehaviour
         }
     }
     [Server]
-    public void Act()
+    virtual public void Act()
     {
 
     }
+    [Server]
+    virtual public void OnDie()
+    {
+
+    }
+
 
     [Server]
     public void Update()
