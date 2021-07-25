@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class DescriptionDisplay : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Text info;
-    public Text towerName;
-    public Text cost;
+    public TMP_Text info;
+    public TMP_Text towerName;
+    public TMP_Text cost;
     void Start()
     {
         
