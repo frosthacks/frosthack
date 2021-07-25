@@ -17,4 +17,5 @@ MonoBehaviour:
   speed: 2
   reward: 20
   damage: 10
-  health: 100
+  health: 2
+  cost: 0

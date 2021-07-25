@@ -226,7 +226,8 @@ public class GameHandler : StateManager
         { "JoggerLv1", 3 },
         { "JoggerLv2", 8 },
         { "TankLv1", 12 },
-        {"Slime", 3}
+        {"Slime", 3},
+        {"Smoker", 1}
     };
 
     // Enemy Spawning
