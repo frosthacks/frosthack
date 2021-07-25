@@ -33,7 +33,7 @@ public class PurchaseDisable : MonoBehaviour
     {
 
         
-        if (UserManager.Global.money < GetPrefabCost())
+        if (prefab==null||UserManager.Global.money < GetPrefabCost())
         {
             button.interactable = false;
 

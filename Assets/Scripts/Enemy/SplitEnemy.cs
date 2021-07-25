@@ -17,6 +17,7 @@ public class SplitEnemy : Enemy
             
             GameObject spawn = Instantiate(baby, transform.position, Quaternion.identity);
             PathTraveller spawnPath = spawn.GetComponent<PathTraveller>();
+            spawn.transform.Translate(new Vector3(Random.Range(-1,1)*0.2f, 0, 0));
             spawnPath.destinationNode = path.destinationNode;
             spawnPath.attacking = path.attacking;
             spawnPath.creator = path.creator;
