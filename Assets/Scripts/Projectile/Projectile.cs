@@ -39,8 +39,8 @@ public class Projectile : NetworkBehaviour
             return;
         }
 
+        if (collision.gameObject.GetComponent<Enemy>() == null) return;
 
-        
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         enemy.health -= data.damage;
         durability -= 1;

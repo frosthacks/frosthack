@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
     {
         SetOrigin(transform.position);
         initialSize = cam.orthographicSize;
-        bounds = Instantiate(bounds, new Vector3(origin.x, origin.y, 0), Quaternion.identity);
+        bounds = Instantiate(boundsPrefab, new Vector3(origin.x, origin.y, 0), Quaternion.identity);
         worldBounds = Instantiate(worldBoundPrefab, Vector3.zero, Quaternion.identity);
 
     }
@@ -56,7 +56,7 @@ public class CameraController : MonoBehaviour
     }
     public bool InWorldBounds(Vector3 pos)
     {
-        BoxCollider2D collider = worldBound.GetComponent<BoxCollider2D>();
+        BoxCollider2D collider = worldBounds.GetComponent<BoxCollider2D>();
         return collider.bounds.Contains(pos);
 
     }

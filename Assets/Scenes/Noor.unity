@@ -12134,8 +12134,10 @@ MonoBehaviour:
   minCamSize: 3
   maxCamSize: 10
   speed: 0.1
-  bounds: {fileID: 726362362378097406, guid: aef720a9ad7fd4bbd8a20941719d28f8, type: 3}
-  worldBound: {fileID: 5225269836698080240, guid: 17b21d3d1a25d46f6a700e812dad883d, type: 3}
+  boundsPrefab: {fileID: 726362362378097406, guid: aef720a9ad7fd4bbd8a20941719d28f8, type: 3}
+  worldBoundPrefab: {fileID: 5225269836698080240, guid: 17b21d3d1a25d46f6a700e812dad883d, type: 3}
+  bounds: {fileID: 0}
+  worldBounds: {fileID: 0}
 --- !u!1 &1237812455
 GameObject:
   m_ObjectHideFlags: 0
