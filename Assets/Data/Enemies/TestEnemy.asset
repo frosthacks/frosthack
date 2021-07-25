@@ -15,7 +15,7 @@ MonoBehaviour:
   name: TestEnemy
   description: 
   speed: 1
-  reward: 10
+  reward: 1
   damage: 2
-  health: -265
+  health: 1
   cost: 0

@@ -9,17 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57bbf7f273981467182141a2c4145888, type: 3}
-  m_Name: Lightning
+  m_Script: {fileID: 11500000, guid: efb1003ce994046a0bd0b85b6f4ed9eb, type: 3}
+  m_Name: JoggerLv1
   m_EditorClassIdentifier: 
-  name: fire
-  description: balls
-  speed: 3
+  name: TestEnemy
+  description: 
+  speed: 2
+  reward: 1
   damage: 1
-  maxDistance: 5
-  durability: 0
-<<<<<<< HEAD
-  aoe: 1
-=======
-  aoe: 0
->>>>>>> d6ebdfa (Added incremental round system)
+  health: 1
+  cost: 10

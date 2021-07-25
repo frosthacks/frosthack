@@ -156,14 +156,45 @@ public class GameHandler : StateManager
         }
     }
 
+    Dictionary<string, int> unitPriorities = new Dictionary<string, int> {
+        { "MinionLv1", 1 },
+        { "MinionLv2", 3 },
+        { "MinionLv3", 8 },
+        { "JoggerLv1", 3 },
+        { "JoggerLv2", 8 },
+        { "TankLv1", 12 },
+    };
+
     // Game Logic
     [Server]
     private void startRound()
     {
         Debug.Log("Starting Round");
-        waveManager.queueUnit("TestEnemy", 5, 0, 0.2f);
-        waveManager.queueUnit("TestEnemy2", 5, 1, 1f);
-        waveManager.queueUnit("TestEnemy", 10, 1, 0.2f);
+        List<string> unitChoices = new List<string> { };
+        float unitCount = (round - 1) * 20;
+
+        foreach (KeyValuePair<string, int> unit in unitPriorities)
+        {
+            if (unitCount >= unit.Value)
+            {
+                for (int i = 0; i < Mathf.Min(10, Mathf.Max(unitCount, 20 / unit.Value)); i++)
+                {
+                    unitChoices.Add(unit.Key);
+                }
+            }
+        }
+
+        while (unitCount > 0)
+        {
+            string wantedEnemy = unitChoices[(int)( Mathf.Min(Random.value, 0.99f) * unitChoices.Count)];
+            int heaviness = unitPriorities[wantedEnemy];
+
+            int chosenAmount = Mathf.Max((int)(Random.value * (unitCount - heaviness)), 0) + 1;
+            unitCount -= chosenAmount * heaviness * 0.75f;
+
+            waveManager.queueUnit(wantedEnemy, chosenAmount, Random.value * heaviness / 5, Random.value * heaviness / 5 );
+        }
+        
         waveManager.startWave();
         roundStart = Time.realtimeSinceStartup + roundPrep * 5;
     }

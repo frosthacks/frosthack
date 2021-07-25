@@ -9032,6 +9032,12 @@ MonoBehaviour:
   - {fileID: 7224432721022870844, guid: 4107afe0339e9564384d5dc64ebec6e9, type: 3}
   - {fileID: 3128014841885993093, guid: 70cbd0ba1b4844a2ba1ad8babb813ca5, type: 3}
   - {fileID: 4596289214406939329, guid: c049e69688e694fc29fe6ab7e1acaaac, type: 3}
+  - {fileID: 8987479236751833885, guid: 0aa3bb15f7f812242b171652760c1dd4, type: 3}
+  - {fileID: 8987479236751833885, guid: 503c64a5401d935449cb2d565e030bf7, type: 3}
+  - {fileID: 8987479236751833885, guid: 001eaf4207f200c4a8d588a66c410472, type: 3}
+  - {fileID: 8987479236751833885, guid: a44f260b6f6222840b226cfc177589f1, type: 3}
+  - {fileID: 8987479236751833885, guid: 38ea11fcafb5e934e95ea771a03be776, type: 3}
+  - {fileID: 8987479236751833885, guid: cfe3a1e7530f1124ba3f0997abd9f273, type: 3}
   game: {fileID: 1638935829}
   lobby: {fileID: 1998666013}
   handler: {fileID: 321056459}
@@ -28269,6 +28275,7 @@ MonoBehaviour:
   isWaveOngoing: 0
   spawnPointList:
   - {fileID: 0}
+  coresPlayers: []
   spawnRadius: 0.15
 --- !u!4 &1839375341
 Transform:
