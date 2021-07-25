@@ -8,6 +8,8 @@ public struct WaveGroup {
     public int count;
     public float pad; // time to wait until next unit group is spawned
     public float stagger; // time between spawning units of the same wave
+
+    public NetworkPlayer target; // set to instance when only spawning for one player
 }
 
 public class WaveManager : NetworkBehaviour
@@ -67,13 +69,17 @@ public class WaveManager : NetworkBehaviour
             // create enemy gameobjects and set them up
             int m = 0;
             foreach (PathNode p in WaveManager.Global.spawnPointList) {
-                Vector3 pos = p.transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
-                GameObject newEnemy = (GameObject)Instantiate(Resources.Load(waveInfo.prefabName), pos, Quaternion.identity);
-                NetworkServer.Spawn(newEnemy);
+                if (waveInfo.target == null || waveInfo.target == coresPlayers[m])
+                {
+                    Vector3 pos = p.transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
+                    GameObject newEnemy = (GameObject)Instantiate(Resources.Load(waveInfo.prefabName), pos, Quaternion.identity);
+                    NetworkServer.Spawn(newEnemy);
 
-                PathTraveller travelCode = newEnemy.GetComponent<PathTraveller>();
-                travelCode.destinationNode = p;
-                travelCode.attacking = coresPlayers[m];
+                    PathTraveller travelCode = newEnemy.GetComponent<PathTraveller>();
+                    travelCode.destinationNode = p;
+                    travelCode.attacking = coresPlayers[m];
+                }
+                
                 m++;
             }
 
@@ -95,4 +101,14 @@ public class WaveManager : NetworkBehaviour
         StartCoroutine(spawnUnits(new WaveGroup {prefabName=prefabName, count=count, pad=0, stagger=stagger}));
    }
 
+    [Server]
+    public void spawnUnit(string prefabName, int count, float stagger, NetworkPlayer target)
+    {
+        if (!WaveManager.Global.isWaveOngoing)
+        {
+            Debug.LogError("There is no ongoing wave.");
+            return;
+        }
+        StartCoroutine(spawnUnits(new WaveGroup { prefabName = prefabName, count = count, pad = 0, stagger = stagger, target = target }));
+    }
 }

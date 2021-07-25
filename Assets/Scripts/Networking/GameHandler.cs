@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
-
 public class GameHandler : StateManager
 {
     public static GameHandler Global;
@@ -16,6 +14,8 @@ public class GameHandler : StateManager
     public WaveManager waveManager;
     public GameObject mainCamera;
     public GameObject playersUI;
+    public GameObject enemiesUI;
+    public GameObject towersUI;
     public GameObject mapSlots;
     public TMP_Text roundText;
     public float roundPrep;
@@ -99,7 +99,18 @@ public class GameHandler : StateManager
                 plrUI.transform.position = plrUI.transform.position + new Vector3(0, -75 * i, 0);
                 netPlr.uiAdjust = plrUI.GetComponent<PlayerUIInfo>();
 
-                netPlr.uiAdjust.changeOrigin.onClick.AddListener(() => camControl.SetTarget(new Vector2(netPlr.location.x, netPlr.location.y)));
+                netPlr.uiAdjust.changeOrigin.onClick.AddListener(() =>
+                {
+                    camControl.SetTarget(new Vector2(netPlr.location.x, netPlr.location.y));
+                    setPlayerTarget(netPlr);
+                });
+
+                netPlr.uiAdjust.changeOrigin2.onClick.AddListener(() =>
+                {
+                    camControl.SetTarget(new Vector2(netPlr.location.x, netPlr.location.y));
+                    setPlayerTarget(netPlr);
+                });
+
                 i++;
             }
 
@@ -114,6 +125,17 @@ public class GameHandler : StateManager
     {
         roundText.text = (roundCountDown == -1) ? round.ToString() : roundCountDown.ToString();
         roundText.color = (roundCountDown == -1) ? new Color(0, 238 / 255f, 1) : new Color(1, 1, 1);
+
+        if (newValue == -1f)
+        {
+            enemiesUI.SetActive(true);
+            towersUI.SetActive(false);
+        }
+        else if (oldValue == -1f)
+        {
+            enemiesUI.SetActive(false);
+            towersUI.SetActive(true);
+        }
     }
 
     public void wantUpgrade(GameObject tower)
@@ -202,6 +224,71 @@ public class GameHandler : StateManager
         { "TankLv1", 12 },
         {"Slime", 3}
     };
+
+    // Enemy Spawning
+    private NetworkPlayer target;
+
+    public void setPlayerTarget(NetworkPlayer newTarget)
+    {
+        if (newTarget == target)
+        {
+            if (target != null)
+            {
+                target.toggleTargetted();
+                target = null;
+            }
+        }
+        else
+        {
+            if (target != null)
+            {
+                target.toggleTargetted();
+            }
+
+            target = newTarget;
+            target.toggleTargetted();
+        }
+
+        Debug.Log("Told of " + newTarget.ToString() + ", now the target is " + target);
+        
+    }
+
+    public void sendEnemy(string name)
+    {
+        if (target != null){
+            Debug.Log("Sending command to make enemy");
+            CmdSendUnit(name, target.gameObject);
+
+        }
+    }
+
+    // Purchase command
+    [Command(requiresAuthority = false)]
+    public void CmdSendUnit(string unitName, GameObject targetObject, NetworkConnectionToClient sender = null)
+    {
+        GameObject unitref = Resources.Load<GameObject>(unitName);
+
+        if (unitref == null)
+        {
+            Debug.Log("Rescource could not be found");
+            return;
+        }
+
+        int cost = unitref.GetComponent<Enemy>().data.cost;
+        NetworkPlayer target = targetObject.GetComponent<NetworkPlayer>();
+        NetworkPlayer plr = sender.identity.gameObject.GetComponent<NetworkPlayer>();
+
+        if (plr != null && target != null && plr.money >= cost && roundStart == -1)
+        {
+            plr.incrementMoney(cost * -1);
+            waveManager.spawnUnit(unitName, 1, 0, target);
+            Debug.Log("Done");
+        }
+        else
+        {
+            Debug.Log("Something off");
+        }
+    }
 
     // Game Logic
     [Server]
