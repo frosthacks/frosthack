@@ -1641,7 +1641,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.2832, y: -0.0267}
+  m_AnchoredPosition: {x: 1.4, y: 0.000017693}
   m_SizeDelta: {x: 41.0929, y: 40.5136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &232627033
@@ -2368,7 +2368,7 @@ MonoBehaviour:
   usernameField: {fileID: 1891414562}
   manager: {fileID: 321056461}
   usernameText: {fileID: 450930329}
-  BuildAs: 0
+  BuildAs: 2
   username: tester
 --- !u!114 &321056460
 MonoBehaviour:
