@@ -118,6 +118,45 @@ public class GameHandler : StateManager
         }
     }
 
+    public void wantUpgrade(GameObject tower)
+    {
+        CmdUpgrade(tower);
+    }
+    [Command(requiresAuthority = false)]
+    public void CmdUpgrade(GameObject tower, NetworkConnectionToClient sender = null)
+    {
+        if (tower != null && tower.GetComponent<Tower>().creator.Equals(sender.identity.gameObject.GetComponent<NetworkPlayer>()))
+        {
+            Tower towerScript = tower.GetComponent<Tower>();
+            GameObject upgradeTo = towerScript.data.upgradeTo;
+
+            if (upgradeTo != null)
+            {
+                int cost = upgradeTo.GetComponent<Tower>().data.cost;
+                NetworkPlayer plr = sender.identity.gameObject.GetComponent<NetworkPlayer>();
+
+                GameObject newTower = Instantiate(upgradeTo, tower.transform.position, Quaternion.identity);
+                plr.incrementMoney(cost * -1);
+
+                Tower tow = newTower.GetComponent<Tower>();
+                tow.creator = plr;
+                tow.placed = true;
+
+                NetworkServer.Destroy(tower);
+                NetworkServer.Spawn(newTower);
+            }
+            else
+            {
+                Debug.Log("No upgrades");
+            }
+
+        }
+        else
+        {
+            Debug.Log("Invalid tower parameter");
+        }
+    }
+
     public void wantPurchase(string towerName, Vector3 position)
     {
         CmdPurchase(towerName, position);
