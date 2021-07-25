@@ -108,14 +108,8 @@ public class GameHandler : StateManager
     // Client listeners
     public void roundChanged(float oldValue, float newValue)
     {
-        if (roundCountDown == -1)
-        {
-            roundText.text = round.ToString();
-        }
-        else
-        {
-            roundText.text = roundCountDown.ToString();
-        }
+        roundText.text = (roundCountDown == -1) ? round.ToString() : roundCountDown.ToString();
+        roundText.color = (roundCountDown == -1) ? new Color(0, 238 / 255f, 1) : new Color(1, 1, 1);
     }
 
     public void wantUpgrade(GameObject tower)
