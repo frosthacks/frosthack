@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 public class TowerManager: MonoBehaviour
 {
     public GameHandler gameManager;
@@ -22,7 +23,7 @@ public class TowerManager: MonoBehaviour
     void placeTower() {
 
         holdingTower.transform.position = ScreenToWorld(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0)&&!EventSystem.current.IsPointerOverGameObject()) {
             PlaceableIndicator indicator = holdingTower.GetComponentInChildren<PlaceableIndicator>();
 
             // don't place if obstructed

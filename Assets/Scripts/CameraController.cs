@@ -18,13 +18,16 @@ public class CameraController : MonoBehaviour
 
     private Vector2 target;
     private bool hasTarget=false;
-    
+    public GameObject boundsPrefab;
+    private GameObject bounds;
+
     // Start is called before the first frame update
     void Start()
     {
         SetOrigin(transform.position);
         initialSize = cam.orthographicSize;
-        
+        bounds = Instantiate(boundsPrefab, new Vector3(origin.x, origin.y, 0), Quaternion.identity);
+
     }
     public void SetOrigin(Vector2 origin)
     {
@@ -38,7 +41,17 @@ public class CameraController : MonoBehaviour
         hasTarget = true;
         this.target = target;
     }
+    public Vector2 getOrigin()
+    {
+        return origin;
+    }
+    public bool InBounds(Vector3 pos)
+    {
+        
+        BoxCollider2D collider = bounds.GetComponent<BoxCollider2D>();
+        return collider.bounds.Contains(pos);
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -67,10 +80,11 @@ public class CameraController : MonoBehaviour
         {
             SetTarget(origin);
         }
-        
+        bounds.transform.position = new Vector3(origin.x, origin.y, 0);
 
-        
-        
+
+
+
     }
     void PanCamera()
     {
