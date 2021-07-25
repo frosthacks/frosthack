@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4596289214406939329
+--- !u!1 &3939370083977548709
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,27 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4596289214406939330}
-  - component: {fileID: 4596289214406939328}
-  - component: {fileID: 922239279843943216}
-  - component: {fileID: 2693032899414506805}
-  - component: {fileID: 8715605357186302041}
-  - component: {fileID: 3395520003784049502}
-  - component: {fileID: -2649300617781541159}
-  m_Layer: 8
-  m_Name: Ricochet
-  m_TagString: Untagged
+  - component: {fileID: 3939370083977548705}
+  - component: {fileID: 3939370083977548704}
+  - component: {fileID: 3939370083977548707}
+  - component: {fileID: 3939370083977548706}
+  - component: {fileID: 3939370083977548734}
+  m_Layer: 6
+  m_Name: WindmillTowerLvl3
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4596289214406939330
+--- !u!4 &3939370083977548705
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596289214406939329}
+  m_GameObject: {fileID: 3939370083977548709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,13 +34,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4596289214406939328
+--- !u!212 &3939370083977548704
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596289214406939329}
+  m_GameObject: {fileID: 3939370083977548709}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,8 +73,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ef8f22d73f06e478a95db906c52edb73, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 21300000, guid: ccac5fa9d9a2dba459b1e39110b4cd16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,81 +85,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &922239279843943216
-BoxCollider2D:
+--- !u!58 &3939370083977548707
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596289214406939329}
+  m_GameObject: {fileID: 3939370083977548709}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01140824, y: -0.134227}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.64, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.11945051, y: 0.101254374}
-  m_EdgeRadius: 0
---- !u!50 &2693032899414506805
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596289214406939329}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!114 &8715605357186302041
+  m_Radius: 0.5
+--- !u!114 &3939370083977548706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596289214406939329}
+  m_GameObject: {fileID: 3939370083977548709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a710d93f26769407fa89eb0750178079, type: 3}
+  m_Script: {fileID: 11500000, guid: 48deddd10e00b92499b5da436024daf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
   creator: {fileID: 0}
-  data: {fileID: 11400000, guid: c37c6091454834d349529e35ca614139, type: 2}
+  data: {fileID: 11400000, guid: 84b36c8218022f843888b34cea63ab67, type: 2}
+  placed: 0
   delta: 0
-  rb: {fileID: 2693032899414506805}
-  iniPos: {x: 0, y: 0}
-  durability: 0
-  tbd: 0
---- !u!114 &3395520003784049502
+  enemyPosition: {x: 0, y: 0}
+  enemies:
+  - {fileID: 0}
+  priority: 0
+  target: {x: 0, y: 0, z: 0}
+  targetExists: 0
+  moneyAmount: 10
+  moneyInterval: 5
+--- !u!114 &3939370083977548734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596289214406939329}
+  m_GameObject: {fileID: 3939370083977548709}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
@@ -170,28 +142,5 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 0
-  m_AssetId: f7025feedbbe94ca3b8665794296492c
+  m_AssetId: 320d6819db131514f8ba1aab7aacde61
   hasSpawned: 0
---- !u!114 &-2649300617781541159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596289214406939329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 0
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
-  compressRotation: 0
-  interpolatePosition: 1
-  interpolateRotation: 1
-  interpolateScale: 1
-  syncScale: 1

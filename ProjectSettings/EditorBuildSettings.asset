@@ -12,9 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Noor.unity
     guid: f75194514d02a5a4c9fcdbddfc5ca524
   - enabled: 0
-    path: Assets/Scenes/NoorBuild.unity
-    guid: 1601ed9c0ab91e541b383f8a1cddf035
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/NewPathScene.unity
     guid: 2eb35868cbc05f644a788bb9f3b72438
+  - enabled: 1
+    path: Assets/Scenes/NoorBuild.unity
+    guid: ec97eca20887194429dcd554eecf4fb2
   m_configObjects: {}

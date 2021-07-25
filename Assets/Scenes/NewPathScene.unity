@@ -17231,7 +17231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &622813293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21115,8 +21115,10 @@ MonoBehaviour:
   minCamSize: 3
   maxCamSize: 10
   speed: 0.1
+  boundsPrefab: {fileID: 726362362378097406, guid: aef720a9ad7fd4bbd8a20941719d28f8, type: 3}
+  worldBoundPrefab: {fileID: 5225269836698080240, guid: 17b21d3d1a25d46f6a700e812dad883d, type: 3}
   bounds: {fileID: 0}
-  worldBound: {fileID: 0}
+  worldBounds: {fileID: 0}
 --- !u!1 &1227571448
 GameObject:
   m_ObjectHideFlags: 0
@@ -23364,7 +23366,7 @@ MonoBehaviour:
   towersUI: {fileID: 0}
   mapSlots: {fileID: 1770449606}
   roundText: {fileID: 232627033}
-  roundPrep: 5
+  roundPrep: 15
   round: 0
   roundCountDown: -1
 --- !u!114 &1638935830

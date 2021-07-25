@@ -99,7 +99,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   creator: {fileID: 0}
-  data: {fileID: 11400000, guid: a45c5c2aad992354a80b77b3e320528d, type: 2}
+  data: {fileID: 11400000, guid: eb16ceaf5f205cc4aad268795a253643, type: 2}
   placed: 0
   delta: 0
   enemyPosition: {x: 0, y: 0}

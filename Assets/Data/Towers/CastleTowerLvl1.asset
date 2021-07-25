@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9388a1c3e03364f0ebac13bc7cb7ca16, type: 3}
   m_Name: CastleTowerLvl1
   m_EditorClassIdentifier: 
-  name: Castle Tower
-  description: Increases your max health
+  name: Ricochet Tower
+  description: Shoots bullets that bounce off enemies
   cost: 100
-  range: 0
+  range: 3
   placeRadius: 1
-  atkSpeed: 0
-  projectile: {fileID: 0}
+  atkSpeed: 1.5
+  projectile: {fileID: 4596289214406939329, guid: f7025feedbbe94ca3b8665794296492c, type: 3}
   upgradeTo: {fileID: 3128014841885993093, guid: 19f34e2c586528e48bed110f689794eb, type: 3}
   homing: 0

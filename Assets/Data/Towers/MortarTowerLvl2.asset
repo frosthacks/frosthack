@@ -19,5 +19,5 @@ MonoBehaviour:
   placeRadius: 1
   atkSpeed: 3
   projectile: {fileID: 4596289214406939329, guid: c049e69688e694fc29fe6ab7e1acaaac, type: 3}
-  upgradeTo: {fileID: 0}
+  upgradeTo: {fileID: 3128014841885993093, guid: dd865800e1f5a5c41a7ea11296734010, type: 3}
   homing: 0

@@ -60,7 +60,7 @@ public class TowerManager: MonoBehaviour
                     selectedTower.GetComponent<Tower>().data.placeRadius
                 );
 
-            } else if (selectedTower != null) {
+            } else if (selectedTower != null && !EventSystem.current.IsPointerOverGameObject()) {
                 // if there is a selected tower, unselected it
                 selectedTower.GetComponent<TowerHoverHighlight>().setUnselected();
                 Destroy(selectedTower.GetComponentInChildren<PlaceableIndicator>().gameObject);

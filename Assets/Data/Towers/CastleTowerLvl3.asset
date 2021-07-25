@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9388a1c3e03364f0ebac13bc7cb7ca16, type: 3}
-  m_Name: RicochetTower
+  m_Name: CastleTowerLvl3
   m_EditorClassIdentifier: 
   name: Ricochet Tower
   description: Shoots bullets that bounce off enemies
@@ -19,5 +19,5 @@ MonoBehaviour:
   placeRadius: 0.75
   atkSpeed: 1
   projectile: {fileID: 4596289214406939329, guid: f7025feedbbe94ca3b8665794296492c, type: 3}
-  upgradeTo: {fileID: 0}
+  upgradeTo: {fileID: 3128014841885993093, guid: 19f34e2c586528e48bed110f689794eb, type: 3}
   homing: 0
