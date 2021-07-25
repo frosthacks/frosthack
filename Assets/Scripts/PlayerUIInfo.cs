@@ -12,4 +12,5 @@ public class PlayerUIInfo : MonoBehaviour
 
     public TMP_Text cashText; // optional, check nullity!
     public Button changeOrigin; // optional, check nullity!
+    public Button changeOrigin2; // optional, check nullity!
 }

@@ -30,7 +30,7 @@ public class LobbyHandler : StateManager
 
     public override void onLeave(NetworkConnection conn)
     {
-        if (allPlayers.ContainsKey(conn.identity))
+        if (conn.identity != null && allPlayers.ContainsKey(conn.identity))
         {
             allPlayers.Remove(conn.identity);
             if (readyPlayers.Contains(conn.identity))

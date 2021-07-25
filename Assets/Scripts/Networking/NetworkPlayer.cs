@@ -87,4 +87,12 @@ public class NetworkPlayer : NetworkBehaviour
     {
         setClientMoney(newAmount);    
     }
+
+    bool target = false;
+    public void toggleTargetted()
+    {
+        target = !target;
+        uiAdjust.changeOrigin.gameObject.SetActive(!target);
+        uiAdjust.changeOrigin2.gameObject.SetActive(target);
+    }
 }
