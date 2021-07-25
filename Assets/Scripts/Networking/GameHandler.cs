@@ -221,13 +221,16 @@ public class GameHandler : StateManager
 
     Dictionary<string, int> unitPriorities = new Dictionary<string, int> {
         { "MinionLv1", 1 },
+        {"Smoker", 1},
+        {"HellHound", 1},
+        {"HellHoundCarriage", 1},
+        {"HellHoundConvoy", 1},
+        {"Slime", 3},
         { "MinionLv2", 3 },
         { "MinionLv3", 8 },
         { "JoggerLv1", 3 },
         { "JoggerLv2", 8 },
         { "TankLv1", 12 },
-        {"Slime", 3},
-        {"Smoker", 1}
     };
 
     // Enemy Spawning
@@ -301,7 +304,7 @@ public class GameHandler : StateManager
     {
         Debug.Log("Starting Round");
         List<string> unitChoices = new List<string> { };
-        float unitCount = (round - 1) * 20;
+        float unitCount = (round - 1) * 50;
 
         foreach (KeyValuePair<string, int> unit in unitPriorities)
         {
@@ -322,7 +325,7 @@ public class GameHandler : StateManager
             int chosenAmount = Mathf.Max((int)(Random.value * (unitCount - heaviness)), 0) + 1;
             unitCount -= chosenAmount * heaviness * 0.75f;
 
-            waveManager.queueUnit(wantedEnemy, chosenAmount, Random.value * heaviness / 5, Random.value * heaviness / 5 );
+            waveManager.queueUnit(wantedEnemy, chosenAmount, Mathf.Max(0.05f, Random.value * heaviness / 5), Mathf.Max(0.05f, Random.value * heaviness / 5) );
         }
         
         waveManager.startWave();
