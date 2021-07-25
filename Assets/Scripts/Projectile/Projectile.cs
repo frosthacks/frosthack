@@ -31,9 +31,13 @@ public class Projectile : NetworkBehaviour
 
     }
 
-    [Server]
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (tbd&&!data.aoe)
         {
             return;
@@ -85,9 +89,13 @@ public class Projectile : NetworkBehaviour
     }
 
 
-    [Server]
     public void Update()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (Vector2.Distance(transform.position, iniPos) > data.maxDistance)
         {
             Destroy(gameObject);
