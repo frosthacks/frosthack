@@ -11,7 +11,7 @@ public class TowerData : ScriptableObject
     public float placeRadius;
     public int atkSpeed;
     public GameObject projectile;
-    public List<string> upgrades;
+    public GameObject upgradeTo;
     public bool homing;
     
 }
