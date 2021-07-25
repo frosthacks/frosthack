@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1265828595047193374}
   - component: {fileID: -7915582025096912192}
   m_Layer: 6
-  m_Name: WindmillTower
+  m_Name: WindmillTowerLvl1
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
