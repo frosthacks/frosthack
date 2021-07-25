@@ -80,22 +80,22 @@ public class Tower : NetworkBehaviour
         target = inRadius[0].transform.position;
     }
     
-    [Server]
     void FixedUpdate()
     {
-        
-        if (!placed)
+        if (isServer)
         {
-            return;
-        }
+            if (!placed)
+            {
+                return;
+            }
 
-        act();
+            act();
+        }    
     }
 
-    [Server]
     public void act()
     {
-
+        
         delta += Time.deltaTime;
         if (delta > data.atkSpeed)
         {

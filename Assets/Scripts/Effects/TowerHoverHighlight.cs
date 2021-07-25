@@ -17,25 +17,28 @@ public class TowerHoverHighlight : MonoBehaviour
     }
 
     void OnMouseOver() {
-        if (isSelected) return; 
+        if (isSelected || rend == null) return; 
         rend.material.shader = outlineShader;
         // rend.material.SetColor("_OutlineColor", Color.cyan);
         rend.material.SetFloat("_Thickness", 0.02f);
     }
 
     void OnMouseExit() {
-        if (isSelected) return; 
+        if (isSelected || rend == null) return; 
         rend.material.shader = defaultShader;
     }
 
     public void setSelected() {
+        if (rend == null) { return;  }
         isSelected = true;
         rend.material.shader = outlineShader;
         // rend.material.SetColor("_OutlineColor", Color.cyan);
         rend.material.SetFloat("_Thickness", 0.04f);
     }
 
-    public void setUnselected() {
+    public void setUnselected()
+    {
+        if (rend == null) { return; }
         isSelected = false;
         rend.material.shader = defaultShader;
     }

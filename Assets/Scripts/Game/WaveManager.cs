@@ -24,7 +24,6 @@ public class WaveManager : NetworkBehaviour
     // config
     public float spawnRadius = 0.25f;
 
-    [Server]
     void Start()
     {
         WaveManager.Global = this;

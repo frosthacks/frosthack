@@ -28,10 +28,14 @@ public class GameHandler : StateManager
 
     float roundStart = -2f;
 
+    public void Start()
+    {
+        Global = this;
+    }
+
     // Server Init
     public override void onBegin(Dictionary<NetworkIdentity, string> players)
     {
-        Global = this;
 
         PathNode[] nodePaths = new PathNode[players.Count];
         NetworkPlayer[] coresPlrs = new NetworkPlayer[players.Count];

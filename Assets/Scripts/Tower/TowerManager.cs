@@ -38,7 +38,7 @@ public class TowerManager: MonoBehaviour
 
             holdingTower = null;
         }
-        if (Input.GetMouseButtonDown(1)||GameHandler.Global.roundCountDown==-1) {
+        if (Input.GetMouseButtonDown(1) || GameHandler.Global.roundCountDown==-1) {
             Destroy(holdingTower);
             holdingTower = null;
         }
