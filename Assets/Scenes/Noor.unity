@@ -12134,6 +12134,8 @@ MonoBehaviour:
   minCamSize: 3
   maxCamSize: 10
   speed: 0.1
+  bounds: {fileID: 726362362378097406, guid: aef720a9ad7fd4bbd8a20941719d28f8, type: 3}
+  worldBound: {fileID: 5225269836698080240, guid: 17b21d3d1a25d46f6a700e812dad883d, type: 3}
 --- !u!1 &1237812455
 GameObject:
   m_ObjectHideFlags: 0
@@ -18155,7 +18157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d388d6d86ef4103b71e15b9de06a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 1638935829}
 --- !u!114 &1839375340
 MonoBehaviour:
   m_ObjectHideFlags: 0
