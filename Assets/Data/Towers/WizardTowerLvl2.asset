@@ -18,6 +18,6 @@ MonoBehaviour:
   range: 5
   placeRadius: 1
   atkSpeed: 0.5
-  projectile: {fileID: 4596289214406939329, guid: c049e69688e694fc29fe6ab7e1acaaac, type: 3}
+  projectile: {fileID: 4596289214406939329, guid: c4bc953676ecd85448068db916ca2347, type: 3}
   upgradeTo: {fileID: 0}
   homing: 0

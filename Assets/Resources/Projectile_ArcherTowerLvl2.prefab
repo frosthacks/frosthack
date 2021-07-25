@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3395520003784049502}
   - component: {fileID: -2649300617781541159}
   m_Layer: 8
-  m_Name: Projectile_WizardTowerLvl1
+  m_Name: Projectile_ArcherTowerLvl2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   creator: {fileID: 0}
-  data: {fileID: 11400000, guid: 315f54e98b0334662851f6adfe29f3da, type: 2}
+  data: {fileID: 11400000, guid: 0af68621231cb2d42a93a9eb459951e5, type: 2}
   delta: 0
   rb: {fileID: 2693032899414506805}
   iniPos: {x: 0, y: 0}
@@ -97,7 +97,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ac3a6cb4fcd3e724f96b7045ba5c723e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34a880a304d1c89429e852dbdad81907, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 0
-  m_AssetId: c049e69688e694fc29fe6ab7e1acaaac
+  m_AssetId: 617448f92c08e974d919da79bb6fa632
   hasSpawned: 0
 --- !u!114 &-2649300617781541159
 MonoBehaviour:
