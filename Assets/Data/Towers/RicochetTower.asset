@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: RicochetTower
   m_EditorClassIdentifier: 
   name: Ricochet Tower
-  description: shoots bouncy bullets
+  description: Shoots bullets that bounce off enemies
   cost: 45
   range: 3
   placeRadius: 0.75
   atkSpeed: 1
   projectile: {fileID: 4596289214406939329, guid: f7025feedbbe94ca3b8665794296492c, type: 3}
-  upgrades: []
+  upgradeTo: {fileID: 0}
   homing: 0

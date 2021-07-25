@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ArcherTowerLvl2
   m_EditorClassIdentifier: 
   name: Archer Tower
-  description: shoots arrows lol
-  cost: 90
+  description: Shoots arrows that pierce the enemies
+  cost: 300
   range: 4
   placeRadius: 1
   atkSpeed: 0.2

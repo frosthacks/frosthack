@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WizardTowerLvl2
   m_EditorClassIdentifier: 
   name: Wizard Tower
-  description: Shoots bolts of lightning
+  description: Shoots aoe bolts of lightning
   cost: 10
   range: 5
   placeRadius: 1

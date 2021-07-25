@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MortarTowerLvl1
   m_EditorClassIdentifier: 
   name: Mortar Tower
-  description: bombs u lmao
+  description: Shoots a long distance shell
   cost: 50
   range: 5
   placeRadius: 1

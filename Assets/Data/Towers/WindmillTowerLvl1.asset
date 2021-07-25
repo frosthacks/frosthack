@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WindmillTowerLvl1
   m_EditorClassIdentifier: 
   name: Windmill Tower
-  description: Passive income
+  description: Generates passive income
   cost: 100
   range: 0
   placeRadius: 0.5

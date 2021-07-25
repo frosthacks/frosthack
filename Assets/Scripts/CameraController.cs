@@ -18,15 +18,15 @@ public class CameraController : MonoBehaviour
 
     private Vector2 target;
     private bool hasTarget=false;
-    public GameObject boundsPrefab;
-    private GameObject bounds;
+    public GameObject bounds;
+    public GameObject worldBound;
 
     // Start is called before the first frame update
     void Start()
     {
         SetOrigin(transform.position);
         initialSize = cam.orthographicSize;
-        bounds = Instantiate(boundsPrefab, new Vector3(origin.x, origin.y, 0), Quaternion.identity);
+        bounds.transform.position = new Vector3(origin.x, origin.y, 0);
 
     }
     public void SetOrigin(Vector2 origin)
@@ -49,6 +49,12 @@ public class CameraController : MonoBehaviour
     {
         
         BoxCollider2D collider = bounds.GetComponent<BoxCollider2D>();
+        return collider.bounds.Contains(pos);
+
+    }
+    public bool InWorldBounds(Vector3 pos)
+    {
+        BoxCollider2D collider = worldBound.GetComponent<BoxCollider2D>();
         return collider.bounds.Contains(pos);
 
     }
@@ -97,7 +103,12 @@ public class CameraController : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
-            cam.transform.position += difference;
+            if (InWorldBounds(cam.transform.position + difference))
+            {
+                cam.transform.position += difference;
+
+            }
+            
             
         }
     }
