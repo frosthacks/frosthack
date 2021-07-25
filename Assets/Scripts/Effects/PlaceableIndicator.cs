@@ -11,6 +11,7 @@ public class PlaceableIndicator : MonoBehaviour
     
 
     public bool isObstructed = false;
+    public bool inBounds = true;
     GameObject attackRadiusCircle;
     GameObject placeRadiusCircle;
 
@@ -32,9 +33,15 @@ public class PlaceableIndicator : MonoBehaviour
     }
     private void Update()
     {
-        if (!cam.InBounds(transform.position))
+        inBounds = cam.InBounds(transform.position);
+        if (isObstructed || !inBounds)
         {
-            isObstructed = true;
+            placeRadiusCircle.GetComponent<SpriteRenderer>().color = PlaceableIndicator.obstructedColor;
+        }
+        else
+        {
+            placeRadiusCircle.GetComponent<SpriteRenderer>().color = PlaceableIndicator.unobstructedColor;
+
         }
         
 
@@ -43,17 +50,18 @@ public class PlaceableIndicator : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D collisionInfo) {
    
-        isObstructed = true; 
-        placeRadiusCircle.GetComponent<SpriteRenderer>().color = PlaceableIndicator.obstructedColor;
+        isObstructed = true;
+        
+        
+
+        
+      
+        
     }
 
     void OnTriggerExit2D(Collider2D collisionInfo) {
-        if (!cam.InBounds(transform.position))
-        {
-            isObstructed = true;
-            return;
-        }
+        
        isObstructed = false;
-       placeRadiusCircle.GetComponent<SpriteRenderer>().color = PlaceableIndicator.unobstructedColor;
+       
     }
 }
