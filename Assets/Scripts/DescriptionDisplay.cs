@@ -7,7 +7,7 @@ public class DescriptionDisplay : MonoBehaviour
 {
     // Start is called before the first frame update
     public TMP_Text info;
-    public TMP_Text towerName;
+    public TMP_Text entityName;
     public TMP_Text cost;
     void Start()
     {
@@ -22,10 +22,23 @@ public class DescriptionDisplay : MonoBehaviour
     public void Display(GameObject obj)
     {
         gameObject.SetActive(true);
-        TowerData data = obj.GetComponent<Tower>().data;
-        info.text = data.description;
-        towerName.text = data.name;
-        cost.text = data.cost.ToString();
+        if (obj.CompareTag("Tower"))
+        {
+            TowerData data = obj.GetComponent<Tower>().data;
+            info.text = data.description;
+            entityName.text = data.name;
+            cost.text = data.cost.ToString();
+
+        }
+        else
+        {
+            EnemyData data = obj.GetComponent<Enemy>().data;
+            info.text = data.description;
+            entityName.text = data.name;
+            cost.text = data.cost.ToString();
+
+        }
+        
 
 
     }
