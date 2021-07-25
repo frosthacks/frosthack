@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Enemy : MonoBehaviour
+using Mirror;
+public class Enemy : NetworkBehaviour
 {
     public EnemyData data;
     SpriteRenderer spriteRenderer;
@@ -11,21 +11,21 @@ public class Enemy : MonoBehaviour
 
 
     void Start() {
-   
+
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         health = data.health;
 
     }
-    public virtual void OnDie()
-    {
-        Instantiate(particleEffect, transform.position, Quaternion.identity);
+
+    [Server]
+    public virtual void OnDie(){ 
+
+        if(particleEffect!=null){
+
+            Instantiate(particleEffect, transform.position, Quaternion.identity);
+        }
 
 
     }
 
-
-    void Update()
-    {
-        
-    }
 }

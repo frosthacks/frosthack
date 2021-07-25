@@ -16,6 +16,6 @@ MonoBehaviour:
   description: 
   speed: 2
   damage: 1
-  maxDistance: 10
+  maxDistance: 4
   durability: 5
   aoe: 0

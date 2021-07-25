@@ -163,6 +163,7 @@ public class GameHandler : StateManager
         { "JoggerLv1", 3 },
         { "JoggerLv2", 8 },
         { "TankLv1", 12 },
+        {"Slime", 1}
     };
 
     // Game Logic
