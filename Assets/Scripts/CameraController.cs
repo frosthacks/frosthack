@@ -18,15 +18,17 @@ public class CameraController : MonoBehaviour
 
     private Vector2 target;
     private bool hasTarget=false;
+    public GameObject boundsPrefab;
+    public GameObject worldBoundPrefab;
     public GameObject bounds;
-    public GameObject worldBound;
-
+    public GameObject worldBounds;
     // Start is called before the first frame update
     void Start()
     {
         SetOrigin(transform.position);
         initialSize = cam.orthographicSize;
-        bounds.transform.position = new Vector3(origin.x, origin.y, 0);
+        bounds = Instantiate(bounds, new Vector3(origin.x, origin.y, 0), Quaternion.identity);
+        worldBounds = Instantiate(worldBoundPrefab, Vector3.zero, Quaternion.identity);
 
     }
     public void SetOrigin(Vector2 origin)
