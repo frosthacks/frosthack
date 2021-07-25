@@ -20,7 +20,7 @@ public class TowerHoverHighlight : MonoBehaviour
         if (isSelected) return; 
         rend.material.shader = outlineShader;
         // rend.material.SetColor("_OutlineColor", Color.cyan);
-        rend.material.SetFloat("_Thickness", 0.015f);
+        rend.material.SetFloat("_Thickness", 0.02f);
     }
 
     void OnMouseExit() {
@@ -32,7 +32,7 @@ public class TowerHoverHighlight : MonoBehaviour
         isSelected = true;
         rend.material.shader = outlineShader;
         // rend.material.SetColor("_OutlineColor", Color.cyan);
-        rend.material.SetFloat("_Thickness", 0.05f);
+        rend.material.SetFloat("_Thickness", 0.04f);
     }
 
     public void setUnselected() {

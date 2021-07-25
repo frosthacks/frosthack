@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Windmill Tower
   description: Passive income
-  cost: 200
+  cost: 100
   range: 0
   placeRadius: 0.5
   atkSpeed: 1
   projectile: {fileID: 0}
-  upgrades: []
+  upgradeTo: {fileID: 3939370083977548709, guid: a635e193fa9b35f42b8b6bbb6a956a2c, type: 3}
   homing: 0
