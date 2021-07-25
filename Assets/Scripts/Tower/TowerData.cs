@@ -9,7 +9,7 @@ public class TowerData : ScriptableObject
     public int cost;
     public float range;
     public float placeRadius;
-    public int atkSpeed;
+    public float atkSpeed;
     public GameObject projectile;
     public GameObject upgradeTo;
     public bool homing;
