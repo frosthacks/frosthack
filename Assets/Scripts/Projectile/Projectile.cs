@@ -51,6 +51,7 @@ public class Projectile : NetworkBehaviour
         if (enemy.health <= 0)
         {
             creator.incrementMoney(enemy.data.reward);
+            enemy.OnDie();
             Destroy(collision.gameObject);
         }
         if (durability <= 0)
