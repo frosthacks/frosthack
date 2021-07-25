@@ -14547,7 +14547,7 @@ MonoBehaviour:
   towersUI: {fileID: 1947972243}
   mapSlots: {fileID: 420745407}
   roundText: {fileID: 232627033}
-  roundPrep: 7
+  roundPrep: 20
   round: 0
   roundCountDown: -1
 --- !u!114 &1638935830

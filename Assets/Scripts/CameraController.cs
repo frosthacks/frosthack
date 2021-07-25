@@ -104,11 +104,14 @@ public class CameraController : MonoBehaviour
         }
         if (Input.GetMouseButton(1))
         {
-            Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
-            if (InWorldBounds(cam.transform.position + difference))
-            {
-                cam.transform.position += difference;
+            Debug.Log(InWorldBounds(cam.transform.position));
 
+            Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 nextpos = cam.transform.position + difference;
+            
+            if (InWorldBounds(new Vector3(nextpos.x, nextpos.y, 0)))
+            {
+                cam.transform.position = nextpos;
             }
             
             
