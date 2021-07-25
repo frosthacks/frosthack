@@ -7,6 +7,8 @@ using TMPro;
 
 public class GameHandler : StateManager
 {
+    public static GameHandler Global;
+
     List<NetworkIdentity> allPlayers;
     public GameObject extraPlayerUIPrefab;
     public PlayerUIInfo localPlayerUI;
@@ -29,6 +31,8 @@ public class GameHandler : StateManager
     // Server Init
     public override void onBegin(Dictionary<NetworkIdentity, string> players)
     {
+        Global = this;
+
         PathNode[] nodePaths = new PathNode[players.Count];
         NetworkPlayer[] coresPlrs = new NetworkPlayer[players.Count];
         allPlayers = new List<NetworkIdentity>();

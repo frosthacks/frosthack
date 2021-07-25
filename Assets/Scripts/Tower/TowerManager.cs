@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+
 public class TowerManager: MonoBehaviour
 {
+    public static TowerManager Global;
+
     public GameHandler gameManager;
+
     GameObject holdingTower;
     GameObject selectedTower;
     string prefabName;
 
     void Start() {
-        
+        Global = this;
     }
 
     void Update() {
@@ -45,9 +49,16 @@ public class TowerManager: MonoBehaviour
     }
 
     void selectTower() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
+
+            if (selectedTower != null) {
+                // if there is a selected tower, unselected it
+                selectedTower.GetComponent<TowerHoverHighlight>().setUnselected();
+                Destroy(selectedTower.GetComponentInChildren<PlaceableIndicator>().gameObject);
+                selectedTower = null;
+            }
 
             if (hit.collider != null && hit.collider.GetComponent<TowerHoverHighlight>() != null) {
                 hit.collider.GetComponent<TowerHoverHighlight>().setSelected();
@@ -58,12 +69,6 @@ public class TowerManager: MonoBehaviour
                     selectedTower.GetComponent<Tower>().data.range,
                     selectedTower.GetComponent<Tower>().data.placeRadius
                 );
-
-            } else if (selectedTower != null) {
-                // if there is a selected tower, unselected it
-                selectedTower.GetComponent<TowerHoverHighlight>().setUnselected();
-                Destroy(selectedTower.GetComponentInChildren<PlaceableIndicator>().gameObject);
-                selectedTower = null;
             }
         }
     }
@@ -92,6 +97,27 @@ public class TowerManager: MonoBehaviour
 
         PlaceableIndicator indicator = placeIndicator.GetComponent<PlaceableIndicator>(); 
         indicator.setRadius(attackRange, placeRange);
+    }
+
+    public void requestUpgrade() {
+        if (selectedTower == null) {
+            Debug.LogWarning("there is no tower selected");
+            return;
+        } 
+
+        Debug.Log("clicked upgrade");
+
+        GameHandler.Global.wantUpgrade(selectedTower);
+    }
+
+    public bool isSelectingTower() {
+        return (selectedTower != null);
+    }
+
+    public GameObject getTowerUpgrade() {
+        if (selectedTower == null) return null;
+
+        return selectedTower.GetComponent<Tower>().data.upgradeTo;
     }
 
     public Vector3 ScreenToWorld(Vector3 mousePos) {

@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 58d64ef576c1004499cf5db083eb06ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -97,11 +97,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ff98d17b55c4c30afe5e80ed0a7adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  creator: {fileID: 0}
   data: {fileID: 11400000, guid: a905dd857d70e415f8121fa6653c37b6, type: 2}
   placed: 0
   delta: 0
   enemyPosition: {x: 0, y: 0}
-  enemies: {fileID: 0}
+  enemies:
+  - {fileID: 0}
   priority: 0
   target: {x: 0, y: 0, z: 0}
   targetExists: 0
