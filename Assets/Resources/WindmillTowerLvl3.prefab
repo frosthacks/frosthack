@@ -125,7 +125,7 @@ MonoBehaviour:
   priority: 0
   target: {x: 0, y: 0, z: 0}
   targetExists: 0
-  moneyAmount: 10
+  moneyAmount: 30
   moneyInterval: 5
 --- !u!114 &3939370083977548734
 MonoBehaviour:
